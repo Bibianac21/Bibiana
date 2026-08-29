@@ -308,6 +308,86 @@ export const activities: Activity[] = [
         "Retrospectiva do Encontro Anual NKENTU 2025, com mais de 200 participantes em Luanda.",
     },
   },
+  {
+    id: "act-baku-ya-diambu-invisivel",
+    titulo: "Baku ya Diambu — Invisível",
+    slug: "baku-ya-diambu-invisivel",
+    categoria: "evento",
+    imagemPrincipal: {
+      src: photo("act-baku-invisivel", 1600, 1000),
+      alt: "Cartaz do Baku ya Diambu — sessão Invisível, com Isvânia Morázia",
+    },
+    data: "2026-08-05",
+    hora: "18h30 — 21h00",
+    local: "Bairro Popular, Rua do Moura, próximo ao Colégio Sanyalise, Luanda",
+    descricaoCurta:
+      "Roda de conversa e sessão de cinema com Isvânia Morázia, à volta do documentário Invisível.",
+    descricaoCompleta: [
+      "O Baku ya Diambu é o ciclo de cinema e conversa da NKENTU: uma exibição seguida de uma roda aberta, sem palco separado da plateia. Nesta edição, a convidada foi Isvânia Morázia, e o filme em foco foi Invisível.",
+      "A conversa partiu do próprio documentário para falar de quem raramente aparece em frente à câmara — e do que muda quando essas histórias passam a ser contadas por dentro, não sobre.",
+    ],
+    estado: "terminada",
+    publicoAlvo: "Entrada livre, sujeita à lotação do espaço.",
+    parceiroIds: ["goethe-institut"],
+    resultados: ["Sala cheia, com conversa a prolongar-se para além do horário previsto"],
+    seo: {
+      metaTitle: "Baku ya Diambu — Invisível — NKENTU",
+      metaDescription:
+        "Roda de conversa e sessão de cinema com Isvânia Morázia, em torno do documentário Invisível. 5 de Agosto de 2026, Luanda.",
+    },
+  },
+  {
+    id: "act-baku-ya-diambu-paisagens",
+    titulo: "Baku ya Diambu — Paisagens do Invisível",
+    slug: "baku-ya-diambu-paisagens-do-invisivel",
+    categoria: "evento",
+    imagemPrincipal: {
+      src: photo("act-baku-paisagens", 1600, 1000),
+      alt: "Cartaz do Baku ya Diambu com os curtas Uma Viagem de Contraste, Paisagens do Invisível e Hotel Panorama",
+    },
+    data: "2026-06-24",
+    hora: "A partir das 18h30",
+    local: "Bairro Popular, Rua do Moura, próximo ao Colégio Sanyalise, Luanda",
+    descricaoCurta:
+      "Roda de conversa e sessão de cinema com três curtas: Uma Viagem de Contraste, Paisagens do Invisível e Hotel Panorama.",
+    descricaoCompleta: [
+      "Uma edição do Baku ya Diambu dedicada a três olhares diferentes sobre contraste e paisagem, exibidos em sequência e discutidos em conjunto no final — Uma Viagem de Contraste, Paisagens do Invisível e Hotel Panorama.",
+    ],
+    estado: "terminada",
+    parceiroIds: ["goethe-institut"],
+    seo: {
+      metaTitle: "Baku ya Diambu — Paisagens do Invisível — NKENTU",
+      metaDescription:
+        "Sessão de cinema e conversa com três curtas-metragens. 24 de Junho de 2026, Luanda.",
+    },
+  },
+  {
+    id: "act-oficina-figurino",
+    titulo: "Oficina de Figurino",
+    slug: "oficina-de-figurino",
+    categoria: "workshop",
+    imagemPrincipal: {
+      src: photo("act-oficina-figurino", 1600, 1000),
+      alt: "Cartaz da Oficina de Figurino com Jéssica Júlio — Tely",
+    },
+    data: "2026-06-13",
+    hora: "09h00 — 16h00",
+    local: "Cine São Paulo, bairro de São Paulo, Luanda",
+    descricaoCurta:
+      "Oficina prática de figurino com Jéssica Júlio (Tely): construir e adaptar roupa para personagem, com o que já se tem em casa.",
+    descricaoCompleta: [
+      "Um dia inteiro dedicado a figurino: como uma peça de roupa comum se transforma em figurino de personagem, com medidas, cortes e pequenas adaptações — sem precisar de comprar tecido novo.",
+      "Conduzida por Jéssica Júlio (Tely), a oficina combina demonstração prática com trabalho directo sobre peças trazidas pelas próprias participantes.",
+    ],
+    estado: "terminada",
+    publicoAlvo: "Vagas limitadas; inscrição prévia necessária.",
+    parceiroIds: ["goethe-institut"],
+    seo: {
+      metaTitle: "Oficina de Figurino — NKENTU",
+      metaDescription:
+        "Oficina prática de figurino com Jéssica Júlio (Tely). 13 de Junho de 2026, Cine São Paulo, Luanda.",
+    },
+  },
 ];
 
 export function getActivities(list: Activity[] = activities): Activity[] {

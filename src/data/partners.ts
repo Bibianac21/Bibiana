@@ -44,6 +44,14 @@ export const partners: Partner[] = [
     logotipo: { src: photo("logo-benguela-textil", 400, 200), alt: "Logótipo da Cooperativa Benguela Têxtil" },
     descricao: "Acolhe estágios práticos para participantes da formação em costura e design têxtil.",
   },
+  {
+    id: "goethe-institut",
+    nome: "Goethe-Institut",
+    // Placeholder — substituir pelo logótipo real do Goethe-Institut via /admin.
+    logotipo: { src: photo("logo-goethe-institut", 400, 200), alt: "Logótipo do Goethe-Institut" },
+    website: "https://www.goethe.de/ins/ao/pt/index.html",
+    descricao: "Parceiro dos ciclos de cinema e conversa e das oficinas criativas da NKENTU em Luanda.",
+  },
 ];
 
 export function getPartnerById(id: string, list: Partner[] = partners): Partner | undefined {
