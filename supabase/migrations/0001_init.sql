@@ -154,25 +154,36 @@ alter table public.site_settings enable row level security;
 alter table public.newsletter_subscribers enable row level security;
 alter table public.contact_messages enable row level security;
 
+-- Policies aren't CREATE-OR-REPLACE-able, so drop-then-create makes this
+-- migration safe to run more than once (e.g. after a partial failure).
 do $$
 declare
   t text;
 begin
   foreach t in array array['activities', 'stories', 'newsletters', 'gallery_items', 'partners', 'team_members', 'site_settings'] loop
+    execute format('drop policy if exists "public read %1$s" on public.%1$s', t);
     execute format('create policy "public read %1$s" on public.%1$s for select using (true)', t);
+    execute format('drop policy if exists "authenticated write %1$s" on public.%1$s', t);
     execute format('create policy "authenticated write %1$s" on public.%1$s for all using (auth.role() = ''authenticated'') with check (auth.role() = ''authenticated'')', t);
   end loop;
 end $$;
 
 -- Subscription/contact forms: the public site can insert (submit a form),
 -- only admins can read or manage the submissions.
+drop policy if exists "public insert newsletter_subscribers" on public.newsletter_subscribers;
 create policy "public insert newsletter_subscribers" on public.newsletter_subscribers for insert with check (true);
+drop policy if exists "authenticated manage newsletter_subscribers" on public.newsletter_subscribers;
 create policy "authenticated manage newsletter_subscribers" on public.newsletter_subscribers for select using (auth.role() = 'authenticated');
+drop policy if exists "authenticated delete newsletter_subscribers" on public.newsletter_subscribers;
 create policy "authenticated delete newsletter_subscribers" on public.newsletter_subscribers for delete using (auth.role() = 'authenticated');
 
+drop policy if exists "public insert contact_messages" on public.contact_messages;
 create policy "public insert contact_messages" on public.contact_messages for insert with check (true);
+drop policy if exists "authenticated manage contact_messages" on public.contact_messages;
 create policy "authenticated manage contact_messages" on public.contact_messages for select using (auth.role() = 'authenticated');
+drop policy if exists "authenticated update contact_messages" on public.contact_messages;
 create policy "authenticated update contact_messages" on public.contact_messages for update using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
+drop policy if exists "authenticated delete contact_messages" on public.contact_messages;
 create policy "authenticated delete contact_messages" on public.contact_messages for delete using (auth.role() = 'authenticated');
 
 -- ─── storage ────────────────────────────────────────────────────────────
@@ -180,9 +191,13 @@ insert into storage.buckets (id, name, public)
 values ('nkentu-media', 'nkentu-media', true)
 on conflict (id) do nothing;
 
+drop policy if exists "public read nkentu-media" on storage.objects;
 create policy "public read nkentu-media" on storage.objects for select using (bucket_id = 'nkentu-media');
+drop policy if exists "authenticated upload nkentu-media" on storage.objects;
 create policy "authenticated upload nkentu-media" on storage.objects for insert with check (bucket_id = 'nkentu-media' and auth.role() = 'authenticated');
+drop policy if exists "authenticated update nkentu-media" on storage.objects;
 create policy "authenticated update nkentu-media" on storage.objects for update using (bucket_id = 'nkentu-media' and auth.role() = 'authenticated');
+drop policy if exists "authenticated delete nkentu-media" on storage.objects;
 create policy "authenticated delete nkentu-media" on storage.objects for delete using (bucket_id = 'nkentu-media' and auth.role() = 'authenticated');
 
 insert into public.site_settings (id) values (1) on conflict (id) do nothing;
