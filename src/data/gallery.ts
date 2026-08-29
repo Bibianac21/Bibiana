@@ -183,12 +183,12 @@ export const galleryVideos: GalleryItem[] = [
   {
     id: "gal-v01",
     imagem: { src: photo("gal-video-1", 1500, 1000), alt: "Fotograma de vídeo do Encontro Anual 2025" },
-    titulo: "Resumo em vídeo: Encontro Anual 2025",
+    titulo: "Resumo: Encontro Anual 2025",
     legenda: "Um minuto e meio dos melhores momentos do Encontro Anual NKENTU 2025.",
     categoria: "eventos",
     actividadeSlug: "encontro-anual-nkentu-2025",
     data: "2025-12-14",
-    tipo: "video",
+    tipo: "imagem",
   },
 ];
 

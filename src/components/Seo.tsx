@@ -29,7 +29,11 @@ export default function Seo({ title, description, ogImage }: SeoProps) {
     setMeta("property", "og:description", description);
     setMeta("property", "og:type", "website");
     setMeta("property", "og:url", window.location.href);
-    if (ogImage) setMeta("property", "og:image", ogImage);
+    if (ogImage) {
+      setMeta("property", "og:image", ogImage);
+    } else {
+      document.head.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.remove();
+    }
     setMeta("name", "twitter:card", "summary_large_image");
   }, [title, description, ogImage]);
 

@@ -31,7 +31,7 @@ export default function Contact() {
       </header>
 
       <div className="container-editorial grid gap-12 pb-24 lg:grid-cols-[1.2fr_1fr]">
-        <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="block">
               <span className="mb-2 block text-sm font-semibold text-ink">Nome</span>

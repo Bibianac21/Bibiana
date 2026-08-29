@@ -99,14 +99,17 @@ inteiramente com os dados fictícios em `src/data/`.
 
 ## Fotografia
 
-O pedido é explícito quanto a evitar fotografia de stock corporativa — mas
-este protótipo não teve acesso a uma biblioteca de fotografia documental
-real. Todas as imagens vêm de `src/lib/images.ts`, que gera URLs
-`picsum.photos` estáveis por item (mesma imagem em cada recarregamento,
-diferente por actividade/história/foto de galeria). **Antes de um
-lançamento real, este ficheiro deve ser o único ponto a alterar**: trocar
-`photo()` por um construtor de URLs do Supabase Storage a apontar para
-fotografia documental real das actividades da NKENTU.
+O pedido é explícito quanto a evitar fotografia de stock corporativa — e
+também quanto a não usar fotografias de pessoas reais e desconhecidas como
+se fossem participantes fictícias da NKENTU. Este protótipo não teve acesso
+a uma biblioteca de fotografia documental real, por isso `src/lib/images.ts`
+gera, localmente e sem qualquer pedido de rede, um placeholder abstracto em
+SVG (gradiente + formas, na paleta do site) como `data:image/svg+xml`,
+determinístico por `seed` — a mesma actividade/história/foto de galeria
+mostra sempre o mesmo placeholder. **Antes de um lançamento real, este
+ficheiro deve ser o único ponto a alterar**: trocar `photo()` por um
+construtor de URLs do Supabase Storage a apontar para fotografia documental
+real das actividades da NKENTU.
 
 ## Design
 

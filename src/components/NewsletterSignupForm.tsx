@@ -36,7 +36,7 @@ export default function NewsletterSignupForm({ compact = false }: NewsletterSign
   }
 
   return (
-    <form onSubmit={handleSubmit} className={compact ? "space-y-3" : "space-y-4"} noValidate>
+    <form onSubmit={handleSubmit} className={compact ? "space-y-3" : "space-y-4"}>
       <div className={compact ? "space-y-2" : "grid gap-3 sm:grid-cols-2"}>
         <label className="block">
           <span className="sr-only">Nome</span>
