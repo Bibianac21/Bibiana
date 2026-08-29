@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-normal text-ink;
+  }
+
+  a {
+    @apply text-inherit;
+  }
+
+  ::selection {
+    @apply bg-clay-500 text-paper;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-clay-500 ring-offset-2 ring-offset-paper;
+  }
+}
+
+@layer components {
+  .container-editorial {
+    @apply container mx-auto;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-clay-600;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-colors duration-300 ease-editorial hover:bg-clay-600 focus-visible:bg-clay-600;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink/25 bg-transparent px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 ease-editorial hover:border-ink hover:bg-ink hover:text-paper;
+  }
+
+  .btn-text {
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-ink underline decoration-clay-500 decoration-2 underline-offset-4 transition-colors duration-300 ease-editorial hover:text-clay-600;
+  }
+
+  .tag-pill {
+    @apply inline-flex items-center rounded-full border border-ink/15 bg-paper px-3 py-1 text-xs font-semibold uppercase tracking-wide text-ink/70;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
