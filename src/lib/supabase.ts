@@ -1,19 +1,17 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 /**
- * Supabase is the intended backend for the NKENTU CMS (see README):
- * `activities`, `stories`, `newsletters`, `gallery_items`, `partners` and
- * `team_members` tables mirroring the shapes in `src/types/content.ts`,
- * plus Storage buckets for photography and Auth for the admin area.
- *
- * No project is provisioned yet, so this client is created lazily and only
- * when both env vars are present — every current page reads from
- * `src/data/*.ts` instead. `getSupabaseClient()` is the single place a
- * future data-fetching layer needs to touch to start reading from the real
- * database rather than the mock fixtures.
+ * Backend for the NKENTU CMS and /admin (see README "CMS / Supabase"):
+ * `activities`, `stories`, `newsletters`, `gallery_items`, `partners`,
+ * `team_members` and `site_settings` tables mirroring the shapes in
+ * `src/types/content.ts`, plus Storage for photography and Auth for the
+ * admin area. The client is created lazily and only when both env vars are
+ * present, so the app (and `scripts/seed.ts`, run under plain Node/tsx
+ * rather than Vite — hence `import.meta.env` may be undefined there)
+ * degrades to the mock fixtures in `src/data/*.ts` when it isn't configured.
  */
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env?.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env?.VITE_SUPABASE_ANON_KEY;
 
 let client: SupabaseClient | null = null;
 
