@@ -1,4 +1,5 @@
 import { photo } from "../lib/images";
+import { getSupabaseClient } from "../lib/supabase";
 import type { Story } from "../types/content";
 
 export const stories: Story[] = [
@@ -135,22 +136,42 @@ export const stories: Story[] = [
   },
 ];
 
-export function getStories(): Story[] {
-  return stories;
+export function getStories(list: Story[] = stories): Story[] {
+  return list;
 }
 
-export function getStoryBySlug(slug: string): Story | undefined {
-  return stories.find((story) => story.slug === slug);
+export function getStoryBySlug(slug: string, list: Story[] = stories): Story | undefined {
+  return list.find((story) => story.slug === slug);
 }
 
-export function getFeaturedStories(limit = 3): Story[] {
-  return stories.filter((story) => story.destaque).slice(0, limit);
+export function getFeaturedStories(limit = 3, list: Story[] = stories): Story[] {
+  return list.filter((story) => story.destaque).slice(0, limit);
 }
 
-export function getRelatedStories(current: Story, limit = 3): Story[] {
-  return stories
+export function getRelatedStories(current: Story, limit = 3, list: Story[] = stories): Story[] {
+  return list
     .filter((story) => story.id !== current.id && story.categoria === current.categoria)
     .slice(0, limit)
-    .concat(stories.filter((story) => story.id !== current.id && story.categoria !== current.categoria))
+    .concat(list.filter((story) => story.id !== current.id && story.categoria !== current.categoria))
     .slice(0, limit);
+}
+
+export async function fetchStories(): Promise<Story[]> {
+  const supabase = getSupabaseClient();
+  if (!supabase) return stories;
+  const { data, error } = await supabase.from("stories").select("*").order("data", { ascending: false });
+  if (error || !data) return stories;
+  return data as Story[];
+}
+
+export async function fetchStoryBySlug(slug: string): Promise<Story | undefined> {
+  return getStoryBySlug(slug, await fetchStories());
+}
+
+export async function fetchFeaturedStories(limit = 3): Promise<Story[]> {
+  return getFeaturedStories(limit, await fetchStories());
+}
+
+export async function fetchRelatedStories(current: Story, limit = 3): Promise<Story[]> {
+  return getRelatedStories(current, limit, await fetchStories());
 }

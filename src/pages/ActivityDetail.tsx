@@ -3,19 +3,34 @@ import Seo from "../components/Seo";
 import StatusBadge from "../components/StatusBadge";
 import ActivityCard from "../components/ActivityCard";
 import NotFound from "./NotFound";
-import { getActivityBySlug, getRelatedActivities } from "../data/activities";
-import { getPartnerById } from "../data/partners";
+import {
+  getActivityBySlug,
+  getRelatedActivities,
+  fetchActivityBySlug,
+  fetchRelatedActivities,
+} from "../data/activities";
+import { getPartnerById, fetchPartners, partners as mockPartners } from "../data/partners";
+import { useLiveData } from "../lib/useLiveData";
 import { ACTIVITY_CATEGORY_LABELS } from "../types/content";
 import { formatDateRange } from "../lib/format";
 
 export default function ActivityDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const activity = slug ? getActivityBySlug(slug) : undefined;
+  const activity = useLiveData(
+    slug ? getActivityBySlug(slug) : undefined,
+    () => (slug ? fetchActivityBySlug(slug) : Promise.resolve(undefined)),
+    [slug],
+  );
+  const partners = useLiveData(mockPartners, fetchPartners);
+  const related = useLiveData(
+    activity ? getRelatedActivities(activity) : [],
+    () => (activity ? fetchRelatedActivities(activity) : Promise.resolve([])),
+    [activity?.id],
+  );
 
   if (!activity) return <NotFound />;
 
-  const related = getRelatedActivities(activity);
-  const parceiros = (activity.parceiroIds ?? []).map(getPartnerById).filter(Boolean);
+  const parceiros = (activity.parceiroIds ?? []).map((id) => getPartnerById(id, partners)).filter(Boolean);
 
   return (
     <>

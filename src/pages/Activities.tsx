@@ -2,7 +2,8 @@ import { useMemo, useState } from "react";
 import Seo from "../components/Seo";
 import ActivityCard from "../components/ActivityCard";
 import FilterTabs from "../components/FilterTabs";
-import { getActivities } from "../data/activities";
+import { getActivities, fetchActivities } from "../data/activities";
+import { useLiveData } from "../lib/useLiveData";
 import { ACTIVITY_CATEGORY_LABELS, type ActivityCategory } from "../types/content";
 
 type FilterValue = "todas" | ActivityCategory;
@@ -18,7 +19,7 @@ const FILTERS: { value: FilterValue; label: string }[] = [
 
 export default function Activities() {
   const [filter, setFilter] = useState<FilterValue>("todas");
-  const activities = getActivities();
+  const activities = useLiveData(getActivities(), fetchActivities);
 
   const filtered = useMemo(() => {
     const list = filter === "todas" ? activities : activities.filter((activity) => activity.categoria === filter);

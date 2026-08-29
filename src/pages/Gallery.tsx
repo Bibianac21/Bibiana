@@ -2,7 +2,8 @@ import { useMemo, useState } from "react";
 import Seo from "../components/Seo";
 import GalleryGrid from "../components/GalleryGrid";
 import FilterTabs from "../components/FilterTabs";
-import { getGalleryItems } from "../data/gallery";
+import { getGalleryItems, fetchGalleryItems } from "../data/gallery";
+import { useLiveData } from "../lib/useLiveData";
 import { GALLERY_CATEGORY_LABELS, type GalleryCategory } from "../types/content";
 
 type FilterValue = "todas" | GalleryCategory;
@@ -17,7 +18,7 @@ const FILTERS: { value: FilterValue; label: string }[] = [
 
 export default function Gallery() {
   const [filter, setFilter] = useState<FilterValue>("todas");
-  const items = getGalleryItems();
+  const items = useLiveData(getGalleryItems(), fetchGalleryItems);
 
   const filtered = useMemo(
     () => (filter === "todas" ? items : items.filter((item) => item.categoria === filter)),

@@ -1,16 +1,21 @@
 import { Link, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
 import NotFound from "./NotFound";
-import { getNewsletterBySlug, getNewsletters } from "../data/newsletters";
+import { getNewsletterBySlug, getNewsletters, fetchNewsletterBySlug, fetchNewsletters } from "../data/newsletters";
+import { useLiveData } from "../lib/useLiveData";
 import { formatDateLong } from "../lib/format";
 
 export default function NewsletterDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const newsletter = slug ? getNewsletterBySlug(slug) : undefined;
+  const newsletter = useLiveData(
+    slug ? getNewsletterBySlug(slug) : undefined,
+    () => (slug ? fetchNewsletterBySlug(slug) : Promise.resolve(undefined)),
+    [slug],
+  );
+  const all = useLiveData(getNewsletters(), fetchNewsletters);
 
   if (!newsletter) return <NotFound />;
 
-  const all = getNewsletters();
   const currentIndex = all.findIndex((item) => item.id === newsletter.id);
   const previous = all[currentIndex + 1];
   const next = all[currentIndex - 1];

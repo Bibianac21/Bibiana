@@ -1,4 +1,5 @@
 import { photo } from "../lib/images";
+import { getSupabaseClient } from "../lib/supabase";
 import type { Partner } from "../types/content";
 
 export const partners: Partner[] = [
@@ -45,6 +46,14 @@ export const partners: Partner[] = [
   },
 ];
 
-export function getPartnerById(id: string): Partner | undefined {
-  return partners.find((partner) => partner.id === id);
+export function getPartnerById(id: string, list: Partner[] = partners): Partner | undefined {
+  return list.find((partner) => partner.id === id);
+}
+
+export async function fetchPartners(): Promise<Partner[]> {
+  const supabase = getSupabaseClient();
+  if (!supabase) return partners;
+  const { data, error } = await supabase.from("partners").select("*").order("nome", { ascending: true });
+  if (error || !data) return partners;
+  return data as Partner[];
 }

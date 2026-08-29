@@ -1,4 +1,5 @@
 import { photo } from "../lib/images";
+import { getSupabaseClient } from "../lib/supabase";
 import type { TeamMember } from "../types/content";
 
 export const team: TeamMember[] = [
@@ -54,6 +55,14 @@ export const team: TeamMember[] = [
   },
 ];
 
-export function getTeamMemberById(id: string): TeamMember | undefined {
-  return team.find((member) => member.id === id);
+export function getTeamMemberById(id: string, list: TeamMember[] = team): TeamMember | undefined {
+  return list.find((member) => member.id === id);
+}
+
+export async function fetchTeam(): Promise<TeamMember[]> {
+  const supabase = getSupabaseClient();
+  if (!supabase) return team;
+  const { data, error } = await supabase.from("team_members").select("*").order("nome", { ascending: true });
+  if (error || !data) return team;
+  return data as TeamMember[];
 }

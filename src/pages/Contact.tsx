@@ -1,11 +1,13 @@
 import { useState, type FormEvent } from "react";
 import Seo from "../components/Seo";
-import { siteSettings } from "../data/site";
+import { siteSettings, fetchSiteContent } from "../data/site";
 import { sendContactMessage } from "../lib/supabase";
+import { useLiveData } from "../lib/useLiveData";
 
 export default function Contact() {
   const [form, setForm] = useState({ nome: "", email: "", assunto: "Participar", mensagem: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const contacto = useLiveData(siteSettings.contacto, async () => (await fetchSiteContent()).contacto);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -105,25 +107,25 @@ export default function Contact() {
               <div className="flex gap-2">
                 <dt className="font-semibold">Email:</dt>
                 <dd>
-                  <a href={`mailto:${siteSettings.contacto.email}`} className="underline decoration-clay-500 underline-offset-4">
-                    {siteSettings.contacto.email}
+                  <a href={`mailto:${contacto.email}`} className="underline decoration-clay-500 underline-offset-4">
+                    {contacto.email}
                   </a>
                 </dd>
               </div>
               <div className="flex gap-2">
                 <dt className="font-semibold">Telefone:</dt>
-                <dd>{siteSettings.contacto.telefone}</dd>
+                <dd>{contacto.telefone}</dd>
               </div>
               <div className="flex gap-2">
                 <dt className="font-semibold">Endereço:</dt>
-                <dd>{siteSettings.contacto.endereco}</dd>
+                <dd>{contacto.endereco}</dd>
               </div>
             </dl>
           </div>
           <div>
             <h2 className="font-display text-xl">Redes sociais</h2>
             <ul className="mt-4 flex flex-wrap gap-4">
-              {siteSettings.contacto.redesSociais.map((rede) => (
+              {contacto.redesSociais.map((rede) => (
                 <li key={rede.label}>
                   <a
                     href={rede.href}

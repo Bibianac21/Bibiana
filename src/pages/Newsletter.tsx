@@ -1,10 +1,11 @@
 import Seo from "../components/Seo";
 import NewsletterCard from "../components/NewsletterCard";
 import NewsletterSignupForm from "../components/NewsletterSignupForm";
-import { getNewsletters } from "../data/newsletters";
+import { getNewsletters, fetchNewsletters } from "../data/newsletters";
+import { useLiveData } from "../lib/useLiveData";
 
 export default function Newsletter() {
-  const newsletters = getNewsletters();
+  const newsletters = useLiveData(getNewsletters(), fetchNewsletters);
 
   return (
     <>

@@ -1,4 +1,5 @@
 import { photo } from "../lib/images";
+import { getSupabaseClient } from "../lib/supabase";
 import type { Newsletter } from "../types/content";
 
 export const newsletters: Newsletter[] = [
@@ -98,14 +99,30 @@ export const newsletters: Newsletter[] = [
   },
 ];
 
-export function getNewsletters(): Newsletter[] {
-  return [...newsletters].sort((a, b) => b.data.localeCompare(a.data));
+export function getNewsletters(list: Newsletter[] = newsletters): Newsletter[] {
+  return [...list].sort((a, b) => b.data.localeCompare(a.data));
 }
 
-export function getNewsletterBySlug(slug: string): Newsletter | undefined {
-  return newsletters.find((newsletter) => newsletter.slug === slug);
+export function getNewsletterBySlug(slug: string, list: Newsletter[] = newsletters): Newsletter | undefined {
+  return list.find((newsletter) => newsletter.slug === slug);
 }
 
-export function getLatestNewsletter(): Newsletter | undefined {
-  return getNewsletters()[0];
+export function getLatestNewsletter(list: Newsletter[] = newsletters): Newsletter | undefined {
+  return getNewsletters(list)[0];
+}
+
+export async function fetchNewsletters(): Promise<Newsletter[]> {
+  const supabase = getSupabaseClient();
+  if (!supabase) return newsletters;
+  const { data, error } = await supabase.from("newsletters").select("*");
+  if (error || !data) return newsletters;
+  return data as Newsletter[];
+}
+
+export async function fetchNewsletterBySlug(slug: string): Promise<Newsletter | undefined> {
+  return getNewsletterBySlug(slug, await fetchNewsletters());
+}
+
+export async function fetchLatestNewsletter(): Promise<Newsletter | undefined> {
+  return getLatestNewsletter(await fetchNewsletters());
 }

@@ -1,4 +1,5 @@
 import { photo } from "../lib/images";
+import { getSupabaseClient } from "../lib/supabase";
 import type { ImpactNumber } from "../types/content";
 
 export const siteSettings = {
@@ -78,3 +79,42 @@ export const sobreConteudo = {
   comunidade:
     "Hoje a comunidade NKENTU inclui participantes activas, antigas participantes que voltam como voluntárias, mentoras, formadoras e instituições parceiras em Luanda, Benguela e na Huíla.",
 };
+
+export interface SiteContent {
+  hero: typeof siteSettings.hero;
+  impacto: typeof siteSettings.impacto;
+  sobreNumeros: typeof siteSettings.sobreNumeros;
+  participar: typeof siteSettings.participar;
+  contacto: typeof siteSettings.contacto;
+  sobre: typeof sobreConteudo;
+}
+
+const mockSiteContent: SiteContent = {
+  hero: siteSettings.hero,
+  impacto: siteSettings.impacto,
+  sobreNumeros: siteSettings.sobreNumeros,
+  participar: siteSettings.participar,
+  contacto: siteSettings.contacto,
+  sobre: sobreConteudo,
+};
+
+/**
+ * The editable half of the homepage/about content, backed by the
+ * `site_settings` singleton row (id = 1). Falls back to the mock values
+ * above when Supabase isn't configured, the row is missing, or a field
+ * within it wasn't set yet.
+ */
+export async function fetchSiteContent(): Promise<SiteContent> {
+  const supabase = getSupabaseClient();
+  if (!supabase) return mockSiteContent;
+  const { data, error } = await supabase.from("site_settings").select("*").eq("id", 1).maybeSingle();
+  if (error || !data) return mockSiteContent;
+  return {
+    hero: data.hero ?? mockSiteContent.hero,
+    impacto: data.impacto ?? mockSiteContent.impacto,
+    sobreNumeros: data.sobreNumeros ?? mockSiteContent.sobreNumeros,
+    participar: data.participar ?? mockSiteContent.participar,
+    contacto: data.contacto ?? mockSiteContent.contacto,
+    sobre: data.sobre ?? mockSiteContent.sobre,
+  };
+}

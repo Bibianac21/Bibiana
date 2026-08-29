@@ -8,17 +8,26 @@ import NewsletterCard from "../components/NewsletterCard";
 import ImpactStats from "../components/ImpactStats";
 import PartnersStrip from "../components/PartnersStrip";
 import FinalCta from "../components/FinalCta";
-import { getUpcomingActivities, getFeaturedActivity } from "../data/activities";
-import { getFeaturedStories } from "../data/stories";
-import { getLatestNewsletter } from "../data/newsletters";
-import { partners } from "../data/partners";
-import { siteSettings } from "../data/site";
+import { getUpcomingActivities, getFeaturedActivity, fetchUpcomingActivities, fetchFeaturedActivity } from "../data/activities";
+import { getFeaturedStories, fetchFeaturedStories } from "../data/stories";
+import { getLatestNewsletter, fetchLatestNewsletter } from "../data/newsletters";
+import { partners as mockPartners, fetchPartners } from "../data/partners";
+import { siteSettings, fetchSiteContent } from "../data/site";
+import { useLiveData } from "../lib/useLiveData";
 
 export default function Home() {
-  const upcoming = getUpcomingActivities(3);
-  const featured = getFeaturedActivity();
-  const stories = getFeaturedStories(2);
-  const latestNewsletter = getLatestNewsletter();
+  const upcoming = useLiveData(getUpcomingActivities(3), () => fetchUpcomingActivities(3));
+  const featured = useLiveData(getFeaturedActivity(), fetchFeaturedActivity);
+  const stories = useLiveData(getFeaturedStories(2), () => fetchFeaturedStories(2));
+  const latestNewsletter = useLiveData(getLatestNewsletter(), fetchLatestNewsletter);
+  const partners = useLiveData(mockPartners, fetchPartners);
+  const content = useLiveData(
+    { hero: siteSettings.hero, impacto: siteSettings.impacto },
+    async () => {
+      const live = await fetchSiteContent();
+      return { hero: live.hero, impacto: live.impacto };
+    },
+  );
 
   return (
     <>
@@ -28,23 +37,19 @@ export default function Home() {
         <div className="container-editorial grid gap-10 pb-16 pt-14 lg:grid-cols-2 lg:items-center lg:pb-24 lg:pt-20">
           <div className="order-2 lg:order-1">
             <p className="eyebrow mb-6">NKENTU</p>
-            <h1 className="text-display-xl text-balance">{siteSettings.hero.headline}</h1>
-            <p className="mt-6 max-w-prose text-lg text-ink/70">{siteSettings.hero.subheadline}</p>
+            <h1 className="text-display-xl text-balance">{content.hero.headline}</h1>
+            <p className="mt-6 max-w-prose text-lg text-ink/70">{content.hero.subheadline}</p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link to={siteSettings.hero.ctaPrimaria.href} className="btn-primary">
-                {siteSettings.hero.ctaPrimaria.label}
+              <Link to={content.hero.ctaPrimaria.href} className="btn-primary">
+                {content.hero.ctaPrimaria.label}
               </Link>
-              <Link to={siteSettings.hero.ctaSecundaria.href} className="btn-secondary">
-                {siteSettings.hero.ctaSecundaria.label}
+              <Link to={content.hero.ctaSecundaria.href} className="btn-secondary">
+                {content.hero.ctaSecundaria.label}
               </Link>
             </div>
           </div>
           <div className="order-1 aspect-[4/5] overflow-hidden rounded-3xl lg:order-2 lg:aspect-[3/4]">
-            <img
-              src={siteSettings.hero.imagem.src}
-              alt={siteSettings.hero.imagem.alt}
-              className="h-full w-full object-cover"
-            />
+            <img src={content.hero.imagem.src} alt={content.hero.imagem.alt} className="h-full w-full object-cover" />
           </div>
         </div>
       </section>
@@ -74,9 +79,9 @@ export default function Home() {
 
       <section className="bg-sand py-20 sm:py-28">
         <div className="container-editorial">
-          <p className="text-display-md max-w-2xl text-balance">{siteSettings.impacto.intro}</p>
+          <p className="text-display-md max-w-2xl text-balance">{content.impacto.intro}</p>
           <div className="mt-14">
-            <ImpactStats numeros={siteSettings.impacto.numeros} />
+            <ImpactStats numeros={content.impacto.numeros} />
           </div>
         </div>
       </section>

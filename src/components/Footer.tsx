@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { siteSettings } from "../data/site";
+import { siteSettings, fetchSiteContent } from "../data/site";
+import { useLiveData } from "../lib/useLiveData";
 import NewsletterSignupForm from "./NewsletterSignupForm";
 
 const FOOTER_LINKS = [
@@ -12,6 +13,8 @@ const FOOTER_LINKS = [
 ];
 
 export default function Footer() {
+  const contacto = useLiveData(siteSettings.contacto, async () => (await fetchSiteContent()).contacto);
+
   return (
     <footer className="border-t border-ink/10 bg-ink text-paper">
       <div className="container-editorial grid gap-12 py-16 lg:grid-cols-[1.2fr_1fr_1.3fr]">
@@ -23,7 +26,7 @@ export default function Footer() {
             {siteSettings.descricaoCurta}
           </p>
           <ul className="mt-6 flex gap-4">
-            {siteSettings.contacto.redesSociais.map((rede) => (
+            {contacto.redesSociais.map((rede) => (
               <li key={rede.label}>
                 <a
                   href={rede.href}
@@ -63,7 +66,7 @@ export default function Footer() {
       <div className="border-t border-paper/10 py-6">
         <div className="container-editorial flex flex-col gap-2 text-xs text-paper/50 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} NKENTU. Todos os direitos reservados.</p>
-          <p>{siteSettings.contacto.endereco}</p>
+          <p>{contacto.endereco}</p>
         </div>
       </div>
     </footer>

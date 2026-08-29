@@ -1,4 +1,5 @@
 import { photo } from "../lib/images";
+import { getSupabaseClient } from "../lib/supabase";
 import type { GalleryItem } from "../types/content";
 
 export const galleryItems: GalleryItem[] = [
@@ -192,6 +193,15 @@ export const galleryVideos: GalleryItem[] = [
   },
 ];
 
-export function getGalleryItems(): GalleryItem[] {
-  return [...galleryItems, ...galleryVideos].sort((a, b) => b.data.localeCompare(a.data));
+export function getGalleryItems(list: GalleryItem[] = [...galleryItems, ...galleryVideos]): GalleryItem[] {
+  return [...list].sort((a, b) => b.data.localeCompare(a.data));
+}
+
+export async function fetchGalleryItems(): Promise<GalleryItem[]> {
+  const supabase = getSupabaseClient();
+  const mock = [...galleryItems, ...galleryVideos];
+  if (!supabase) return mock;
+  const { data, error } = await supabase.from("gallery_items").select("*");
+  if (error || !data) return mock;
+  return data as GalleryItem[];
 }

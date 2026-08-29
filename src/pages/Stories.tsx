@@ -2,7 +2,8 @@ import { useMemo, useState } from "react";
 import Seo from "../components/Seo";
 import StoryCard from "../components/StoryCard";
 import FilterTabs from "../components/FilterTabs";
-import { getStories } from "../data/stories";
+import { getStories, fetchStories } from "../data/stories";
+import { useLiveData } from "../lib/useLiveData";
 import { STORY_CATEGORY_LABELS, type StoryCategory } from "../types/content";
 
 type FilterValue = "todas" | StoryCategory;
@@ -17,7 +18,7 @@ const FILTERS: { value: FilterValue; label: string }[] = [
 
 export default function Stories() {
   const [filter, setFilter] = useState<FilterValue>("todas");
-  const stories = getStories();
+  const stories = useLiveData(getStories(), fetchStories);
 
   const filtered = useMemo(() => {
     const list = filter === "todas" ? stories : stories.filter((story) => story.categoria === filter);

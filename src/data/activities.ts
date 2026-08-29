@@ -1,4 +1,5 @@
 import { photo } from "../lib/images";
+import { getSupabaseClient } from "../lib/supabase";
 import type { Activity } from "../types/content";
 
 export const activities: Activity[] = [
@@ -309,33 +310,58 @@ export const activities: Activity[] = [
   },
 ];
 
-export function getActivities(): Activity[] {
-  return activities;
+export function getActivities(list: Activity[] = activities): Activity[] {
+  return list;
 }
 
-export function getActivityBySlug(slug: string): Activity | undefined {
-  return activities.find((activity) => activity.slug === slug);
+export function getActivityBySlug(slug: string, list: Activity[] = activities): Activity | undefined {
+  return list.find((activity) => activity.slug === slug);
 }
 
-export function getFeaturedActivity(): Activity | undefined {
-  return activities.find((activity) => activity.destaque) ?? activities[0];
+export function getFeaturedActivity(list: Activity[] = activities): Activity | undefined {
+  return list.find((activity) => activity.destaque) ?? list[0];
 }
 
-export function getUpcomingActivities(limit?: number): Activity[] {
-  const upcoming = activities
+export function getUpcomingActivities(limit?: number, list: Activity[] = activities): Activity[] {
+  const upcoming = list
     .filter((activity) => activity.estado !== "terminada")
     .sort((a, b) => a.data.localeCompare(b.data));
   return typeof limit === "number" ? upcoming.slice(0, limit) : upcoming;
 }
 
-export function getRelatedActivities(current: Activity, limit = 3): Activity[] {
-  return activities
+export function getRelatedActivities(current: Activity, limit = 3, list: Activity[] = activities): Activity[] {
+  return list
     .filter((activity) => activity.id !== current.id && activity.categoria === current.categoria)
     .slice(0, limit)
-    .concat(
-      activities.filter(
-        (activity) => activity.id !== current.id && activity.categoria !== current.categoria,
-      ),
-    )
+    .concat(list.filter((activity) => activity.id !== current.id && activity.categoria !== current.categoria))
     .slice(0, limit);
+}
+
+/**
+ * Live-data counterparts: read from Supabase when configured, falling
+ * back to the mock `activities` array when it isn't (or the query fails)
+ * so the public site keeps working without a backend attached.
+ */
+export async function fetchActivities(): Promise<Activity[]> {
+  const supabase = getSupabaseClient();
+  if (!supabase) return activities;
+  const { data, error } = await supabase.from("activities").select("*").order("data", { ascending: true });
+  if (error || !data) return activities;
+  return data as Activity[];
+}
+
+export async function fetchActivityBySlug(slug: string): Promise<Activity | undefined> {
+  return getActivityBySlug(slug, await fetchActivities());
+}
+
+export async function fetchFeaturedActivity(): Promise<Activity | undefined> {
+  return getFeaturedActivity(await fetchActivities());
+}
+
+export async function fetchUpcomingActivities(limit?: number): Promise<Activity[]> {
+  return getUpcomingActivities(limit, await fetchActivities());
+}
+
+export async function fetchRelatedActivities(current: Activity, limit = 3): Promise<Activity[]> {
+  return getRelatedActivities(current, limit, await fetchActivities());
 }

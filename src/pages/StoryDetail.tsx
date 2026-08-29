@@ -2,17 +2,25 @@ import { Link, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
 import StoryCard from "../components/StoryCard";
 import NotFound from "./NotFound";
-import { getStoryBySlug, getRelatedStories } from "../data/stories";
+import { getStoryBySlug, getRelatedStories, fetchStoryBySlug, fetchRelatedStories } from "../data/stories";
+import { useLiveData } from "../lib/useLiveData";
 import { STORY_CATEGORY_LABELS } from "../types/content";
 import { formatDateLong } from "../lib/format";
 
 export default function StoryDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const story = slug ? getStoryBySlug(slug) : undefined;
+  const story = useLiveData(
+    slug ? getStoryBySlug(slug) : undefined,
+    () => (slug ? fetchStoryBySlug(slug) : Promise.resolve(undefined)),
+    [slug],
+  );
+  const related = useLiveData(
+    story ? getRelatedStories(story) : [],
+    () => (story ? fetchRelatedStories(story) : Promise.resolve([])),
+    [story?.id],
+  );
 
   if (!story) return <NotFound />;
-
-  const related = getRelatedStories(story);
 
   return (
     <>
