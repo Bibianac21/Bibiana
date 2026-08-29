@@ -53,7 +53,7 @@ export default function AdminLogin() {
           {loading ? "A entrar…" : "Entrar"}
         </button>
         {error && (
-          <p className="text-sm text-clay-600" role="alert">
+          <p className="text-sm text-clay-300" role="alert">
             {error}
           </p>
         )}

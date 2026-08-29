@@ -65,7 +65,7 @@ export default function About() {
         </ul>
       </section>
 
-      <section className="bg-ink py-16 text-paper sm:py-24">
+      <section className="bg-clay-700 py-16 text-ink sm:py-24">
         <div className="container-editorial">
           <h2 className="font-display text-2xl">A NKENTU em números</h2>
           <div className="mt-10">
@@ -90,7 +90,7 @@ export default function About() {
                 </div>
                 <div>
                   <h3 className="font-display text-xl">{member.nome}</h3>
-                  <p className="text-sm font-medium text-clay-600">{member.funcao}</p>
+                  <p className="text-sm font-medium text-clay-300">{member.funcao}</p>
                   <p className="mt-2 text-sm text-ink/70">{member.biografia}</p>
                 </div>
               </div>

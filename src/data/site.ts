@@ -4,6 +4,9 @@ import type { ImpactNumber } from "../types/content";
 
 export const siteSettings = {
   nome: "NKENTU",
+  // Vazio por omissão: sem logótipo carregado, o cabeçalho mostra o nome
+  // "NKENTU" em texto. Faz upload do logótipo real em /admin/homepage.
+  logo: { src: "", alt: "Logótipo da NKENTU" },
   descricaoCurta:
     "Projecto social angolano dedicado à capacitação e desenvolvimento de mulheres, através de formação, workshops, mentorias e criação de oportunidades.",
   hero: {
@@ -81,6 +84,7 @@ export const sobreConteudo = {
 };
 
 export interface SiteContent {
+  logo: typeof siteSettings.logo;
   hero: typeof siteSettings.hero;
   impacto: typeof siteSettings.impacto;
   sobreNumeros: typeof siteSettings.sobreNumeros;
@@ -90,6 +94,7 @@ export interface SiteContent {
 }
 
 const mockSiteContent: SiteContent = {
+  logo: siteSettings.logo,
   hero: siteSettings.hero,
   impacto: siteSettings.impacto,
   sobreNumeros: siteSettings.sobreNumeros,
@@ -110,6 +115,7 @@ export async function fetchSiteContent(): Promise<SiteContent> {
   const { data, error } = await supabase.from("site_settings").select("*").eq("id", 1).maybeSingle();
   if (error || !data) return mockSiteContent;
   return {
+    logo: data.logo?.src ? data.logo : mockSiteContent.logo,
     hero: data.hero ?? mockSiteContent.hero,
     impacto: data.impacto ?? mockSiteContent.impacto,
     sobreNumeros: data.sobreNumeros ?? mockSiteContent.sobreNumeros,

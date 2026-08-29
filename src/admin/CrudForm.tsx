@@ -69,7 +69,7 @@ export default function CrudForm<T extends { id: string }>({
       </div>
 
       {error && (
-        <p className="mt-6 text-sm text-clay-600" role="alert">
+        <p className="mt-6 text-sm text-clay-300" role="alert">
           {error}
         </p>
       )}
@@ -79,7 +79,7 @@ export default function CrudForm<T extends { id: string }>({
           {saving ? "A guardar…" : "Guardar"}
         </button>
         {showDelete && (
-          <button type="button" onClick={handleDelete} disabled={saving} className="btn-text text-clay-600">
+          <button type="button" onClick={handleDelete} disabled={saving} className="btn-text text-clay-300">
             Eliminar
           </button>
         )}

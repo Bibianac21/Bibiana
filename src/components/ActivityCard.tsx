@@ -8,7 +8,7 @@ export default function ActivityCard({ activity }: { activity: Activity }) {
   return (
     <Link
       to={`/actividades/${activity.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white/40 transition-transform duration-300 ease-editorial hover:-translate-y-1"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-paper-warm transition-transform duration-300 ease-editorial hover:-translate-y-1"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <img

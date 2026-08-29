@@ -47,7 +47,7 @@ export default function CrudList<T extends { id: string }>({
         </Link>
       </div>
 
-      {error && <p className="text-clay-600">{error}</p>}
+      {error && <p className="text-clay-300">{error}</p>}
       {!error && rows === null && <p className="text-ink/50">A carregar…</p>}
       {rows && rows.length === 0 && <p className="text-ink/50">Ainda não há registos.</p>}
 

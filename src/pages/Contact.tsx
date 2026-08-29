@@ -89,12 +89,12 @@ export default function Contact() {
           </button>
 
           {status === "success" && (
-            <p className="text-sm text-moss-700" role="status">
+            <p className="text-sm text-moss-300" role="status">
               Mensagem enviada. Vamos responder brevemente.
             </p>
           )}
           {status === "error" && (
-            <p className="text-sm text-clay-600" role="alert">
+            <p className="text-sm text-clay-300" role="alert">
               Não foi possível enviar a mensagem. Tente novamente.
             </p>
           )}

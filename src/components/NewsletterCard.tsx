@@ -6,7 +6,7 @@ export default function NewsletterCard({ newsletter }: { newsletter: Newsletter 
   return (
     <Link
       to={`/newsletter/${newsletter.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white/40 transition-transform duration-300 ease-editorial hover:-translate-y-1 sm:flex-row"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-paper-warm transition-transform duration-300 ease-editorial hover:-translate-y-1 sm:flex-row"
     >
       <div className="relative aspect-[16/10] overflow-hidden sm:w-2/5">
         <img
@@ -17,7 +17,7 @@ export default function NewsletterCard({ newsletter }: { newsletter: Newsletter 
         />
       </div>
       <div className="flex flex-1 flex-col gap-3 p-6">
-        <p className="text-xs font-semibold uppercase tracking-wide text-clay-600">
+        <p className="text-xs font-semibold uppercase tracking-wide text-clay-300">
           Edição nº{newsletter.edicao} · {formatDateLong(newsletter.data)}
         </p>
         <h3 className="font-display text-xl leading-snug text-balance">{newsletter.titulo}</h3>

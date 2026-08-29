@@ -62,7 +62,7 @@ export default function FieldRenderer<T>({ field, value, onChange }: FieldRender
               <button
                 type="button"
                 onClick={() => set(items.filter((_, i) => i !== index))}
-                className="btn-text col-span-full self-start text-clay-600"
+                className="btn-text col-span-full self-start text-clay-300"
               >
                 Remover
               </button>
@@ -122,7 +122,7 @@ export default function FieldRenderer<T>({ field, value, onChange }: FieldRender
   const label = (
     <span className="mb-2 block text-sm font-semibold text-ink">
       {field.label}
-      {field.required && <span className="text-clay-600"> *</span>}
+      {field.required && <span className="text-clay-300"> *</span>}
     </span>
   );
 

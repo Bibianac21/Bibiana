@@ -6,7 +6,7 @@ import StatusBadge from "./StatusBadge";
 
 export default function FeaturedActivity({ activity }: { activity: Activity }) {
   return (
-    <div className="grid overflow-hidden rounded-3xl border border-ink/10 bg-white/40 lg:grid-cols-2">
+    <div className="grid overflow-hidden rounded-3xl border border-ink/10 bg-paper-warm lg:grid-cols-2">
       <div className="relative aspect-[4/3] lg:aspect-auto">
         <img
           src={activity.imagemPrincipal.src}

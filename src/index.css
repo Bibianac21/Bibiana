@@ -21,7 +21,7 @@
   }
 
   ::selection {
-    @apply bg-clay-500 text-paper;
+    @apply bg-clay-600 text-ink;
   }
 
   *:focus-visible {
@@ -35,11 +35,11 @@
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-clay-600;
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-clay-300;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-colors duration-300 ease-editorial hover:bg-clay-600 focus-visible:bg-clay-600;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-colors duration-300 ease-editorial hover:bg-clay-600 hover:text-ink focus-visible:bg-clay-600 focus-visible:text-ink;
   }
 
   .btn-secondary {
@@ -47,7 +47,7 @@
   }
 
   .btn-text {
-    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-ink underline decoration-clay-500 decoration-2 underline-offset-4 transition-colors duration-300 ease-editorial hover:text-clay-600;
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-ink underline decoration-clay-500 decoration-2 underline-offset-4 transition-colors duration-300 ease-editorial hover:text-clay-300;
   }
 
   .tag-pill {

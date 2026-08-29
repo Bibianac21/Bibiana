@@ -19,7 +19,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-paper">
       <div className="flex flex-col lg:flex-row">
-        <aside className="border-b border-ink/10 bg-ink px-6 py-6 text-paper lg:min-h-screen lg:w-64 lg:shrink-0 lg:border-b-0 lg:border-r">
+        <aside className="border-b border-ink/10 bg-clay-700 px-6 py-6 text-ink lg:min-h-screen lg:w-64 lg:shrink-0 lg:border-b-0 lg:border-r">
           <Link to="/admin" className="font-display text-xl">
             NKENTU · admin
           </Link>
@@ -30,19 +30,19 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                 to={item.href}
                 end={item.href === "/admin"}
                 className={({ isActive }) =>
-                  `text-sm font-medium ${isActive ? "text-clay-300" : "text-paper/70 hover:text-paper"}`
+                  `text-sm font-medium ${isActive ? "text-ochre-300" : "text-ink/70 hover:text-ink"}`
                 }
               >
                 {item.label}
               </NavLink>
             ))}
           </nav>
-          <div className="mt-10 border-t border-paper/15 pt-4 text-xs text-paper/50">
+          <div className="mt-10 border-t border-ink/15 pt-4 text-xs text-ink/50">
             <p className="truncate">{session?.user.email}</p>
-            <button type="button" onClick={() => signOut()} className="mt-2 underline decoration-paper/30 hover:text-paper">
+            <button type="button" onClick={() => signOut()} className="mt-2 underline decoration-ink/30 hover:text-ink">
               Terminar sessão
             </button>
-            <Link to="/" className="mt-2 block underline decoration-paper/30 hover:text-paper">
+            <Link to="/" className="mt-2 block underline decoration-ink/30 hover:text-ink">
               Ver site público
             </Link>
           </div>

@@ -35,14 +35,14 @@ export default function Lightbox({ items, index, onClose, onNavigate }: Lightbox
       role="dialog"
       aria-modal="true"
       aria-label={item.titulo}
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/95 p-4 sm:p-8"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-paper/95 p-4 sm:p-8"
       onClick={onClose}
     >
       <button
         type="button"
         onClick={onClose}
         aria-label="Fechar"
-        className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-paper/30 text-paper hover:bg-paper/10 sm:right-8 sm:top-8"
+        className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-ink/30 text-ink hover:bg-ink/10 sm:right-8 sm:top-8"
       >
         ✕
       </button>
@@ -54,7 +54,7 @@ export default function Lightbox({ items, index, onClose, onNavigate }: Lightbox
           onNavigate((index - 1 + items.length) % items.length);
         }}
         aria-label="Imagem anterior"
-        className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-paper/30 text-paper hover:bg-paper/10 sm:left-6"
+        className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-ink/30 text-ink hover:bg-ink/10 sm:left-6"
       >
         ‹
       </button>
@@ -68,16 +68,16 @@ export default function Lightbox({ items, index, onClose, onNavigate }: Lightbox
           alt={item.imagem.alt}
           className="max-h-[65vh] w-full rounded-lg object-contain"
         />
-        <div className="text-paper">
+        <div className="text-ink">
           <p className="font-display text-xl">{item.titulo}</p>
-          <p className="mt-1 text-sm text-paper/70">{item.legenda}</p>
-          <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs uppercase tracking-wide text-paper/50">
+          <p className="mt-1 text-sm text-ink/70">{item.legenda}</p>
+          <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs uppercase tracking-wide text-ink/50">
             <span>{GALLERY_CATEGORY_LABELS[item.categoria]}</span>
             <span>{formatDateLong(item.data)}</span>
             {item.actividadeSlug && (
               <Link
                 to={`/actividades/${item.actividadeSlug}`}
-                className="underline decoration-ochre-300 underline-offset-4 hover:text-paper"
+                className="underline decoration-ochre-300 underline-offset-4 hover:text-ink"
               >
                 Ver actividade relacionada
               </Link>
@@ -93,7 +93,7 @@ export default function Lightbox({ items, index, onClose, onNavigate }: Lightbox
           onNavigate((index + 1) % items.length);
         }}
         aria-label="Próxima imagem"
-        className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-paper/30 text-paper hover:bg-paper/10 sm:right-6"
+        className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-ink/30 text-ink hover:bg-ink/10 sm:right-6"
       >
         ›
       </button>

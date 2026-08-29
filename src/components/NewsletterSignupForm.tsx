@@ -24,12 +24,12 @@ export default function NewsletterSignupForm({ compact = false }: NewsletterSign
   }
 
   const inputClasses = compact
-    ? "w-full rounded-full border border-paper/25 bg-transparent px-4 py-2.5 text-sm text-paper placeholder:text-paper/40 focus-visible:ring-clay-300"
+    ? "w-full rounded-full border border-ink/25 bg-transparent px-4 py-2.5 text-sm text-ink placeholder:text-ink/40 focus-visible:ring-clay-300"
     : "w-full rounded-full border border-ink/20 bg-paper px-5 py-3.5 text-sm text-ink placeholder:text-ink/40";
 
   if (status === "success") {
     return (
-      <p className={compact ? "text-sm text-paper/80" : "text-sm text-moss-700"} role="status">
+      <p className={compact ? "text-sm text-ink/80" : "text-sm text-moss-300"} role="status">
         Subscrição confirmada. Obrigada por acompanhar a NKENTU.
       </p>
     );
@@ -66,12 +66,12 @@ export default function NewsletterSignupForm({ compact = false }: NewsletterSign
       <button
         type="submit"
         disabled={status === "loading"}
-        className={compact ? "btn-primary w-full bg-clay-500 hover:bg-clay-600" : "btn-primary"}
+        className={compact ? "btn-primary w-full bg-clay-500 text-ink hover:bg-clay-600" : "btn-primary"}
       >
         {status === "loading" ? "A subscrever…" : "Subscrever"}
       </button>
       {status === "error" && (
-        <p className="text-sm text-clay-600" role="alert">
+        <p className="text-sm text-clay-300" role="alert">
           Não foi possível concluir a subscrição. Tente novamente.
         </p>
       )}

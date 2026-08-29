@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
+import { siteSettings, fetchSiteContent } from "../data/site";
+import { useLiveData } from "../lib/useLiveData";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -14,6 +16,7 @@ const NAV_LINKS = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const logo = useLiveData(siteSettings.logo, async () => (await fetchSiteContent()).logo);
 
   useEffect(() => {
     setOpen(false);
@@ -29,8 +32,12 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-paper/90 backdrop-blur">
       <div className="container-editorial flex h-20 items-center justify-between">
-        <Link to="/" className="font-display text-2xl tracking-tight text-ink" aria-label="NKENTU, página inicial">
-          NKENTU
+        <Link to="/" className="flex items-center" aria-label="NKENTU, página inicial">
+          {logo.src ? (
+            <img src={logo.src} alt={logo.alt || "NKENTU"} className="h-9 w-auto object-contain" />
+          ) : (
+            <span className="font-display text-2xl tracking-tight text-ink">NKENTU</span>
+          )}
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
@@ -40,8 +47,8 @@ export default function Header() {
               to={link.href}
               end={link.href === "/"}
               className={({ isActive }) =>
-                `text-sm font-medium tracking-wide transition-colors duration-200 hover:text-clay-600 ${
-                  isActive ? "text-clay-600" : "text-ink/80"
+                `text-sm font-medium tracking-wide transition-colors duration-200 hover:text-clay-300 ${
+                  isActive ? "text-clay-300" : "text-ink/80"
                 }`
               }
             >
@@ -91,7 +98,7 @@ export default function Header() {
                   to={link.href}
                   end={link.href === "/"}
                   className={({ isActive }) =>
-                    `block py-4 font-display text-2xl ${isActive ? "text-clay-600" : "text-ink"}`
+                    `block py-4 font-display text-2xl ${isActive ? "text-clay-300" : "text-ink"}`
                   }
                 >
                   {link.label}

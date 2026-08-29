@@ -8,17 +8,27 @@ export default {
     },
     extend: {
       colors: {
+        // NKENTU's real identity is dark: near-black pages, off-white text.
+        // Token names are kept as-is (ink = text, paper = page background)
+        // so every component that already composes them stays correct —
+        // only the two hex values flip which one reads as "light".
         ink: {
-          DEFAULT: "#1C1A17",
-          soft: "#3A362F",
+          DEFAULT: "#F5F2FA",
+          soft: "#C9C2DA",
         },
         paper: {
-          DEFAULT: "#FAF6EF",
-          warm: "#F3ECDD",
+          DEFAULT: "#0D0B14",
+          warm: "#17131F",
         },
         sand: {
-          DEFAULT: "#EDE3D0",
-          dark: "#DDCEAE",
+          DEFAULT: "#171320",
+          dark: "#221C30",
+        },
+        // Fixed dark color, independent of the ink/paper theme swap above —
+        // for text placed on light accent chips (status badges) that stay
+        // light-tinted regardless of theme.
+        night: {
+          DEFAULT: "#1C1A17",
         },
         clay: {
           50: "#F4EFFE",

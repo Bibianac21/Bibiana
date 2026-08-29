@@ -108,6 +108,7 @@ export const PARTNER_FIELDS: FieldConfig[] = [
 ];
 
 export const SITE_SETTINGS_FIELDS: FieldConfig[] = [
+  { key: "logo", label: "Logótipo (cabeçalho do site)", type: "image", hint: "Sem imagem, o cabeçalho mostra o nome NKENTU em texto." },
   { key: "hero.headline", label: "Hero — título", type: "textarea", required: true },
   { key: "hero.subheadline", label: "Hero — subtítulo", type: "textarea" },
   { key: "hero.imagem", label: "Hero — imagem", type: "image" },

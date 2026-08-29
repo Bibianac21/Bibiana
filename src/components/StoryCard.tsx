@@ -6,7 +6,7 @@ export default function StoryCard({ story, size = "default" }: { story: Story; s
   return (
     <Link
       to={`/historias/${story.slug}`}
-      className={`group flex overflow-hidden rounded-2xl border border-ink/10 bg-white/40 transition-transform duration-300 ease-editorial hover:-translate-y-1 ${
+      className={`group flex overflow-hidden rounded-2xl border border-ink/10 bg-paper-warm transition-transform duration-300 ease-editorial hover:-translate-y-1 ${
         size === "large" ? "flex-col sm:flex-row" : "flex-col"
       }`}
     >
