@@ -73,7 +73,7 @@ async function main() {
     }),
   );
   await upsert("stories", withDefaults(stories, { galeria: [], destaque: false }));
-  await upsert("newsletters", withDefaults(newsletters, { destaque: false }));
+  await upsert("newsletters", withDefaults(newsletters, { galeria: [], destaque: false }));
   await upsert("gallery_items", [...galleryItems, ...galleryVideos]);
 
   await upsert(

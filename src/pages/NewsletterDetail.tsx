@@ -51,6 +51,19 @@ export default function NewsletterDetail() {
             <p key={i}>{paragrafo}</p>
           ))}
         </div>
+
+        {newsletter.galeria && newsletter.galeria.length > 0 && (
+          <div className="mt-16">
+            <h2 className="font-display text-2xl">Galeria</h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {newsletter.galeria.map((foto) => (
+                <div key={foto.src} className="aspect-[4/3] overflow-hidden rounded-xl">
+                  <img src={foto.src} alt={foto.alt} loading="lazy" className="h-full w-full object-cover" />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </article>
 
       <nav className="border-t border-ink/10 bg-sand py-10" aria-label="Navegação entre edições">

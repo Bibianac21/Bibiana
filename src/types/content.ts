@@ -111,6 +111,7 @@ export interface Newsletter {
   imagem: ImageAsset;
   resumo: string;
   conteudo: string[];
+  galeria?: ImageAsset[];
   destaque?: boolean;
   seo: SeoFields;
 }

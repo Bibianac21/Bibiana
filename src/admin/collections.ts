@@ -78,6 +78,7 @@ export const NEWSLETTER_FIELDS: FieldConfig[] = [
   { key: "imagem", label: "Imagem", type: "image" },
   { key: "resumo", label: "Resumo", type: "textarea", required: true },
   { key: "conteudo", label: "Conteúdo", type: "lines", hint: "Um parágrafo por linha." },
+  { key: "galeria", label: "Galeria de fotos", type: "repeater", repeaterFields: [{ key: "", label: "Foto", type: "image" }] },
   { key: "destaque", label: "Newsletter em destaque na homepage", type: "boolean" },
   ...SEO_FIELDS,
 ];
