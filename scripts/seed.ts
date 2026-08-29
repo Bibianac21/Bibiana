@@ -45,12 +45,35 @@ async function upsert(table: string, rows: unknown[], conflictKey = "id") {
   console.log(`✓ ${table}: ${rows.length} rows`);
 }
 
+/**
+ * PostgREST turns an array upsert into a single multi-row INSERT, so the
+ * column list is the union of keys across every row in the batch — a row
+ * that omits an optional field (e.g. no `redesSociais`) gets an explicit
+ * NULL for it rather than falling back to the column's SQL default,
+ * which then fails NOT NULL columns like `redesSociais jsonb not null
+ * default '[]'`. Filling every row with the same defaults first keeps the
+ * column set (and values) consistent across the whole batch.
+ */
+function withDefaults<T extends Record<string, unknown>>(rows: T[], defaults: Partial<T>): T[] {
+  return rows.map((row) => ({ ...defaults, ...row }));
+}
+
 async function main() {
   await upsert("partners", partners);
-  await upsert("team_members", team);
-  await upsert("activities", activities);
-  await upsert("stories", stories);
-  await upsert("newsletters", newsletters);
+  await upsert("team_members", withDefaults(team, { redesSociais: [] }));
+  await upsert(
+    "activities",
+    withDefaults(activities, {
+      objectivos: [],
+      galeria: [],
+      parceiroIds: [],
+      resultados: [],
+      testemunhos: [],
+      destaque: false,
+    }),
+  );
+  await upsert("stories", withDefaults(stories, { galeria: [], destaque: false }));
+  await upsert("newsletters", withDefaults(newsletters, { destaque: false }));
   await upsert("gallery_items", [...galleryItems, ...galleryVideos]);
 
   await upsert(
