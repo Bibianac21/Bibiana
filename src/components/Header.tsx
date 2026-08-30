@@ -31,10 +31,10 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-paper/90 backdrop-blur">
-      <div className="container-editorial flex h-20 items-center justify-between">
+      <div className="container-editorial flex h-24 items-center justify-between">
         <Link to="/" className="flex items-center" aria-label="NKENTU, página inicial">
           {logo.src ? (
-            <img src={logo.src} alt={logo.alt || "NKENTU"} className="h-14 w-auto object-contain sm:h-16" />
+            <img src={logo.src} alt={logo.alt || "NKENTU"} className="h-16 w-auto object-contain sm:h-20" />
           ) : (
             <span className="font-display text-2xl tracking-tight text-ink">NKENTU</span>
           )}
