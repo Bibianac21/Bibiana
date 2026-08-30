@@ -34,7 +34,7 @@ export default function Header() {
       <div className="container-editorial flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center" aria-label="NKENTU, página inicial">
           {logo.src ? (
-            <img src={logo.src} alt={logo.alt || "NKENTU"} className="h-9 w-auto object-contain" />
+            <img src={logo.src} alt={logo.alt || "NKENTU"} className="h-14 w-auto object-contain sm:h-16" />
           ) : (
             <span className="font-display text-2xl tracking-tight text-ink">NKENTU</span>
           )}
