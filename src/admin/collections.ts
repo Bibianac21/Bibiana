@@ -159,6 +159,7 @@ export const SITE_SETTINGS_FIELDS: FieldConfig[] = [
       { key: "href", label: "Link", type: "text" },
     ],
   },
+  { key: "sobre.imagem", label: "Sobre — imagem de cabeçalho", type: "image" },
   { key: "sobre.quemE", label: "Sobre — quem é a NKENTU", type: "textarea" },
   { key: "sobre.missao", label: "Sobre — missão", type: "textarea" },
   { key: "sobre.oQueFazemos", label: "Sobre — o que fazemos", type: "lines" },

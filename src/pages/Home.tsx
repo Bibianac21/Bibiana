@@ -8,10 +8,12 @@ import NewsletterCard from "../components/NewsletterCard";
 import ImpactStats from "../components/ImpactStats";
 import PartnersStrip from "../components/PartnersStrip";
 import FinalCta from "../components/FinalCta";
+import Reveal from "../components/Reveal";
 import { getUpcomingActivities, getFeaturedActivity, fetchUpcomingActivities, fetchFeaturedActivity } from "../data/activities";
 import { getFeaturedStories, fetchFeaturedStories } from "../data/stories";
 import { getLatestNewsletter, fetchLatestNewsletter } from "../data/newsletters";
 import { partners as mockPartners, fetchPartners } from "../data/partners";
+import { team as mockTeam, fetchTeam } from "../data/team";
 import { siteSettings, fetchSiteContent } from "../data/site";
 import { useLiveData } from "../lib/useLiveData";
 
@@ -21,6 +23,7 @@ export default function Home() {
   const stories = useLiveData(getFeaturedStories(2), () => fetchFeaturedStories(2));
   const latestNewsletter = useLiveData(getLatestNewsletter(), fetchLatestNewsletter);
   const partners = useLiveData(mockPartners, fetchPartners);
+  const team = useLiveData(mockTeam, fetchTeam);
   const content = useLiveData(
     { hero: siteSettings.hero, impacto: siteSettings.impacto },
     async () => {
@@ -35,7 +38,7 @@ export default function Home() {
 
       <section className="relative overflow-hidden">
         <div className="container-editorial grid gap-10 pb-16 pt-14 lg:grid-cols-2 lg:items-center lg:pb-24 lg:pt-20">
-          <div className="order-2 lg:order-1">
+          <Reveal className="order-2 lg:order-1">
             <p className="eyebrow mb-6">NKENTU</p>
             <h1 className="text-display-xl text-balance">{content.hero.headline}</h1>
             <p className="mt-6 max-w-prose text-lg text-ink/70">{content.hero.subheadline}</p>
@@ -47,10 +50,10 @@ export default function Home() {
                 {content.hero.ctaSecundaria.label}
               </Link>
             </div>
-          </div>
-          <div className="order-1 aspect-[4/5] overflow-hidden rounded-3xl lg:order-2 lg:aspect-[3/4]">
+          </Reveal>
+          <Reveal delay={120} className="order-1 aspect-[4/5] overflow-hidden rounded-3xl lg:order-2 lg:aspect-[3/4]">
             <img src={content.hero.imagem.src} alt={content.hero.imagem.alt} className="h-full w-full object-cover" />
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -116,6 +119,42 @@ export default function Home() {
         >
           <div className="max-w-2xl">
             <NewsletterCard newsletter={latestNewsletter} />
+          </div>
+        </Section>
+      )}
+
+      {team.length > 0 && (
+        <Section
+          eyebrow="Quem somos"
+          title="A cara da NKENTU"
+          description="A equipa que desenha, facilita e acompanha cada formação, workshop e mentoria."
+          action={
+            <Link to="/sobre#equipa" className="btn-text">
+              Conhecer a equipa
+            </Link>
+          }
+        >
+          <div className="grid gap-6 sm:grid-cols-3">
+            {team.slice(0, 3).map((member) => (
+              <Link
+                key={member.id}
+                to="/sobre#equipa"
+                className="group flex flex-col gap-4"
+              >
+                <div className="aspect-[4/5] overflow-hidden rounded-2xl">
+                  <img
+                    src={member.fotografia.src}
+                    alt={member.fotografia.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 ease-editorial group-hover:scale-105"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-display text-xl">{member.nome}</h3>
+                  <p className="text-sm font-medium text-clay-300">{member.funcao}</p>
+                </div>
+              </Link>
+            ))}
           </div>
         </Section>
       )}

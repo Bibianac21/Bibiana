@@ -71,6 +71,15 @@ export default {
       transitionTimingFunction: {
         editorial: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
+      keyframes: {
+        "page-fade": {
+          from: { opacity: "0", transform: "translateY(12px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        "page-fade": "page-fade 500ms cubic-bezier(0.22, 1, 0.36, 1) both",
+      },
     },
   },
   plugins: [],

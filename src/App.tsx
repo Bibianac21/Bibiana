@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -27,6 +27,7 @@ import AdminHomepage from "./pages/admin/AdminHomepage";
 import AdminSubscribers from "./pages/admin/AdminSubscribers";
 
 function PublicLayout() {
+  const { pathname } = useLocation();
   return (
     <>
       <a
@@ -36,7 +37,7 @@ function PublicLayout() {
         Saltar para o conteúdo
       </a>
       <Header />
-      <main id="main-content">
+      <main id="main-content" key={pathname} className="animate-page-fade">
         <Outlet />
       </main>
       <Footer />

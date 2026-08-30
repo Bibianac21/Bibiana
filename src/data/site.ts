@@ -66,6 +66,10 @@ export const siteSettings = {
 };
 
 export const sobreConteudo = {
+  imagem: {
+    src: photo("sobre-hero", 1400, 1000),
+    alt: "Equipa e participantes da NKENTU reunidas numa sala de formação",
+  },
   quemE:
     "A NKENTU é um projecto social angolano que cria espaços de aprendizagem, partilha e desenvolvimento para mulheres. Começámos em 2022, em Luanda, com um grupo pequeno de workshops de costura — e crescemos a partir do que as próprias participantes pediam a seguir.",
   missao:
@@ -121,6 +125,6 @@ export async function fetchSiteContent(): Promise<SiteContent> {
     sobreNumeros: data.sobreNumeros ?? mockSiteContent.sobreNumeros,
     participar: data.participar ?? mockSiteContent.participar,
     contacto: data.contacto ?? mockSiteContent.contacto,
-    sobre: data.sobre ?? mockSiteContent.sobre,
+    sobre: data.sobre ? { ...mockSiteContent.sobre, ...data.sobre } : mockSiteContent.sobre,
   };
 }

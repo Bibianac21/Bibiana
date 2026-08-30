@@ -60,3 +60,9 @@
     text-wrap: balance;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-page-fade {
+    animation: none;
+  }
+}
