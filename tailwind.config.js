@@ -76,9 +76,14 @@ export default {
           from: { opacity: "0", transform: "translateY(12px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "hero-zoom": {
+          from: { transform: "scale(1.08)" },
+          to: { transform: "scale(1)" },
+        },
       },
       animation: {
         "page-fade": "page-fade 500ms cubic-bezier(0.22, 1, 0.36, 1) both",
+        "hero-zoom": "hero-zoom 14s cubic-bezier(0.22, 1, 0.36, 1) both",
       },
     },
   },

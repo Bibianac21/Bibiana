@@ -38,30 +38,37 @@ export default function Home() {
     <>
       <Seo title="NKENTU — Capacitação e desenvolvimento de mulheres" description={siteSettings.descricaoCurta} />
 
-      <section className="relative overflow-hidden bg-clay-600">
-        <div className="grid lg:grid-cols-2">
-          <Reveal className="order-2 flex flex-col justify-center gap-6 px-5 py-16 sm:px-8 lg:order-1 lg:px-16 lg:py-24">
-            <p className="eyebrow text-ink/75">NKENTU</p>
-            <h1 className="text-display-xl text-balance uppercase text-ink">{content.hero.headline}</h1>
-            <p className="max-w-prose text-lg text-ink/85">{content.hero.subheadline}</p>
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Link to={content.hero.ctaPrimaria.href} className="btn-primary bg-paper text-ink hover:bg-ink hover:text-paper">
-                {content.hero.ctaPrimaria.label}
-              </Link>
-              <Link
-                to={content.hero.ctaSecundaria.href}
-                className="btn-secondary border-ink/40 text-ink hover:border-ink hover:bg-ink hover:text-paper"
-              >
-                {content.hero.ctaSecundaria.label}
-              </Link>
-            </div>
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={content.hero.imagem.src}
+            alt={content.hero.imagem.alt}
+            className="h-full w-full origin-center animate-hero-zoom object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-clay-700/90 via-clay-700/25 to-transparent" />
+        </div>
+        <div className="container-editorial relative flex min-h-[540px] flex-col justify-end gap-5 pb-14 pt-32 sm:min-h-[620px] lg:min-h-[700px] lg:pb-20">
+          <Reveal>
+            <p className="eyebrow text-ink/85">NKENTU</p>
           </Reveal>
-          <Reveal delay={120} className="relative order-1 min-h-[360px] overflow-hidden lg:order-2 lg:min-h-[600px]">
-            <div
-              className="absolute -left-20 top-1/2 hidden h-72 w-72 -translate-y-1/2 rounded-full bg-clay-500/50 lg:block"
-              aria-hidden="true"
-            />
-            <img src={content.hero.imagem.src} alt={content.hero.imagem.alt} className="absolute inset-0 h-full w-full object-cover" />
+          <Reveal delay={90}>
+            <h1 className="text-display-lg max-w-3xl text-balance uppercase text-ink [text-shadow:0_4px_28px_rgba(13,11,20,0.55)]">
+              {content.hero.headline}
+            </h1>
+          </Reveal>
+          <Reveal delay={180}>
+            <p className="max-w-md text-lg text-ink/90">{content.hero.subheadline}</p>
+          </Reveal>
+          <Reveal delay={270} className="flex flex-wrap gap-4 pt-2">
+            <Link to={content.hero.ctaPrimaria.href} className="btn-primary bg-ochre-500 text-night hover:bg-ochre-300">
+              {content.hero.ctaPrimaria.label}
+            </Link>
+            <Link
+              to={content.hero.ctaSecundaria.href}
+              className="btn-secondary border-ink/60 text-ink hover:border-ink hover:bg-ink/15"
+            >
+              {content.hero.ctaSecundaria.label}
+            </Link>
           </Reveal>
         </div>
       </section>

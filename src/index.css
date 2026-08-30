@@ -62,7 +62,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-page-fade {
+  .animate-page-fade,
+  .animate-hero-zoom {
     animation: none;
   }
 }
