@@ -7,12 +7,12 @@ function parseValue(raw: string): { prefix: string; number: number; suffix: stri
   return { prefix: match[1], number: Number(match[2]), suffix: match[3] };
 }
 
-function StatItem({ numero }: { numero: ImpactNumber }) {
+function useAnimatedValue(raw: string) {
   const ref = useRef<HTMLElement>(null);
-  const [display, setDisplay] = useState(numero.valor);
+  const [display, setDisplay] = useState(raw);
 
   useEffect(() => {
-    const parsed = parseValue(numero.valor);
+    const parsed = parseValue(raw);
     const node = ref.current;
     if (!parsed || !node) return;
     if (typeof IntersectionObserver === "undefined" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -37,8 +37,13 @@ function StatItem({ numero }: { numero: ImpactNumber }) {
     );
     observer.observe(node);
     return () => observer.disconnect();
-  }, [numero.valor]);
+  }, [raw]);
 
+  return { ref, display };
+}
+
+function StatItem({ numero }: { numero: ImpactNumber }) {
+  const { ref, display } = useAnimatedValue(numero.valor);
   return (
     <div>
       <dt className="sr-only">{numero.label}</dt>
@@ -50,7 +55,36 @@ function StatItem({ numero }: { numero: ImpactNumber }) {
   );
 }
 
-export default function ImpactStats({ numeros }: { numeros: ImpactNumber[] }) {
+function StatRow({ numero }: { numero: ImpactNumber }) {
+  const { ref, display } = useAnimatedValue(numero.valor);
+  return (
+    <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-ink/15 py-6 first:pt-0 last:border-b-0">
+      <dt className="sr-only">{numero.label}</dt>
+      <dd ref={ref} className="font-display text-5xl text-ink sm:text-6xl">
+        {display}
+      </dd>
+      <p className="text-sm text-ink/70 sm:text-base">{numero.label}</p>
+    </div>
+  );
+}
+
+interface ImpactStatsProps {
+  numeros: ImpactNumber[];
+  /** "grid" (default) for even columns, "list" for a bold stacked stat block. */
+  variant?: "grid" | "list";
+}
+
+export default function ImpactStats({ numeros, variant = "grid" }: ImpactStatsProps) {
+  if (variant === "list") {
+    return (
+      <dl className="border-t border-ink/15">
+        {numeros.map((numero) => (
+          <StatRow key={numero.label} numero={numero} />
+        ))}
+      </dl>
+    );
+  }
+
   return (
     <dl className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
       {numeros.map((numero) => (

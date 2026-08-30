@@ -148,6 +148,10 @@ export function getFeaturedStories(limit = 3, list: Story[] = stories): Story[] 
   return list.filter((story) => story.destaque).slice(0, limit);
 }
 
+export function getTestimonialStories(limit = 5, list: Story[] = stories): Story[] {
+  return list.filter((story) => story.citacaoDestaque).slice(0, limit);
+}
+
 export function getRelatedStories(current: Story, limit = 3, list: Story[] = stories): Story[] {
   return list
     .filter((story) => story.id !== current.id && story.categoria === current.categoria)
@@ -174,4 +178,8 @@ export async function fetchFeaturedStories(limit = 3): Promise<Story[]> {
 
 export async function fetchRelatedStories(current: Story, limit = 3): Promise<Story[]> {
   return getRelatedStories(current, limit, await fetchStories());
+}
+
+export async function fetchTestimonialStories(limit = 5): Promise<Story[]> {
+  return getTestimonialStories(limit, await fetchStories());
 }

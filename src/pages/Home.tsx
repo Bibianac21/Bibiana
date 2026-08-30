@@ -9,8 +9,9 @@ import ImpactStats from "../components/ImpactStats";
 import PartnersStrip from "../components/PartnersStrip";
 import FinalCta from "../components/FinalCta";
 import Reveal from "../components/Reveal";
+import Testimonials from "../components/Testimonials";
 import { getUpcomingActivities, getFeaturedActivity, fetchUpcomingActivities, fetchFeaturedActivity } from "../data/activities";
-import { getFeaturedStories, fetchFeaturedStories } from "../data/stories";
+import { getFeaturedStories, fetchFeaturedStories, getTestimonialStories, fetchTestimonialStories } from "../data/stories";
 import { getLatestNewsletter, fetchLatestNewsletter } from "../data/newsletters";
 import { partners as mockPartners, fetchPartners } from "../data/partners";
 import { team as mockTeam, fetchTeam } from "../data/team";
@@ -21,6 +22,7 @@ export default function Home() {
   const upcoming = useLiveData(getUpcomingActivities(3), () => fetchUpcomingActivities(3));
   const featured = useLiveData(getFeaturedActivity(), fetchFeaturedActivity);
   const stories = useLiveData(getFeaturedStories(2), () => fetchFeaturedStories(2));
+  const testimonialStories = useLiveData(getTestimonialStories(5), () => fetchTestimonialStories(5));
   const latestNewsletter = useLiveData(getLatestNewsletter(), fetchLatestNewsletter);
   const partners = useLiveData(mockPartners, fetchPartners);
   const team = useLiveData(mockTeam, fetchTeam);
@@ -36,23 +38,30 @@ export default function Home() {
     <>
       <Seo title="NKENTU — Capacitação e desenvolvimento de mulheres" description={siteSettings.descricaoCurta} />
 
-      <section className="relative overflow-hidden">
-        <div className="container-editorial grid gap-10 pb-16 pt-14 lg:grid-cols-2 lg:items-center lg:pb-24 lg:pt-20">
-          <Reveal className="order-2 lg:order-1">
-            <p className="eyebrow mb-6">NKENTU</p>
-            <h1 className="text-display-xl text-balance">{content.hero.headline}</h1>
-            <p className="mt-6 max-w-prose text-lg text-ink/70">{content.hero.subheadline}</p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link to={content.hero.ctaPrimaria.href} className="btn-primary">
+      <section className="relative overflow-hidden bg-clay-600">
+        <div className="grid lg:grid-cols-2">
+          <Reveal className="order-2 flex flex-col justify-center gap-6 px-5 py-16 sm:px-8 lg:order-1 lg:px-16 lg:py-24">
+            <p className="eyebrow text-ink/75">NKENTU</p>
+            <h1 className="text-display-xl text-balance uppercase text-ink">{content.hero.headline}</h1>
+            <p className="max-w-prose text-lg text-ink/85">{content.hero.subheadline}</p>
+            <div className="flex flex-wrap gap-4 pt-2">
+              <Link to={content.hero.ctaPrimaria.href} className="btn-primary bg-paper text-ink hover:bg-ink hover:text-paper">
                 {content.hero.ctaPrimaria.label}
               </Link>
-              <Link to={content.hero.ctaSecundaria.href} className="btn-secondary">
+              <Link
+                to={content.hero.ctaSecundaria.href}
+                className="btn-secondary border-ink/40 text-ink hover:border-ink hover:bg-ink hover:text-paper"
+              >
                 {content.hero.ctaSecundaria.label}
               </Link>
             </div>
           </Reveal>
-          <Reveal delay={120} className="order-1 aspect-[4/5] overflow-hidden rounded-3xl lg:order-2 lg:aspect-[3/4]">
-            <img src={content.hero.imagem.src} alt={content.hero.imagem.alt} className="h-full w-full object-cover" />
+          <Reveal delay={120} className="relative order-1 min-h-[360px] overflow-hidden lg:order-2 lg:min-h-[600px]">
+            <div
+              className="absolute -left-20 top-1/2 hidden h-72 w-72 -translate-y-1/2 rounded-full bg-clay-500/50 lg:block"
+              aria-hidden="true"
+            />
+            <img src={content.hero.imagem.src} alt={content.hero.imagem.alt} className="absolute inset-0 h-full w-full object-cover" />
           </Reveal>
         </div>
       </section>
@@ -80,13 +89,14 @@ export default function Home() {
         </Section>
       )}
 
-      <section className="bg-sand py-20 sm:py-28">
-        <div className="container-editorial">
-          <p className="text-display-md max-w-2xl text-balance">{content.impacto.intro}</p>
-          <div className="mt-14">
-            <ImpactStats numeros={content.impacto.numeros} />
+      <section className="bg-clay-700 py-20 text-ink sm:py-28">
+        <Reveal className="container-editorial grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div>
+            <p className="eyebrow text-ink/70">O nosso impacto</p>
+            <p className="text-display-md mt-4 max-w-xl text-balance">{content.impacto.intro}</p>
           </div>
-        </div>
+          <ImpactStats numeros={content.impacto.numeros} variant="list" />
+        </Reveal>
       </section>
 
       <Section
@@ -155,6 +165,14 @@ export default function Home() {
                 </div>
               </Link>
             ))}
+          </div>
+        </Section>
+      )}
+
+      {testimonialStories.length > 0 && (
+        <Section eyebrow="Testemunhos" title="O que dizem sobre a NKENTU">
+          <div className="mx-auto max-w-2xl">
+            <Testimonials stories={testimonialStories} />
           </div>
         </Section>
       )}

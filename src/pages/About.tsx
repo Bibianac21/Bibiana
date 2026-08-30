@@ -66,11 +66,12 @@ export default function About() {
       </section>
 
       <section className="bg-clay-700 py-16 text-ink sm:py-24">
-        <Reveal className="container-editorial">
-          <h2 className="font-display text-2xl">A NKENTU em números</h2>
-          <div className="mt-10">
-            <ImpactStats numeros={content.sobreNumeros} />
+        <Reveal className="container-editorial grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div>
+            <p className="eyebrow text-ink/70">Em números</p>
+            <h2 className="font-display text-2xl mt-4">A NKENTU em números</h2>
           </div>
+          <ImpactStats numeros={content.sobreNumeros} variant="list" />
         </Reveal>
       </section>
 

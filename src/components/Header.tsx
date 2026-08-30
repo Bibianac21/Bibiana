@@ -30,8 +30,31 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/10 bg-paper/90 backdrop-blur">
-      <div className="container-editorial flex h-24 items-center justify-between">
+    <>
+    <header className="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 backdrop-blur">
+      <div className="container-editorial flex h-24 items-center justify-between gap-4">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="flex items-center gap-3 text-sm font-semibold uppercase tracking-wide text-ink"
+          aria-expanded={open}
+          aria-controls="site-menu"
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+        >
+          <span className="relative block h-4 w-6 shrink-0">
+            <span
+              className={`absolute left-0 top-0 block h-0.5 w-6 bg-ink transition-transform duration-300 ${open ? "translate-y-[7px] rotate-45" : ""}`}
+            />
+            <span
+              className={`absolute left-0 top-[7px] block h-0.5 w-6 bg-ink transition-opacity duration-200 ${open ? "opacity-0" : "opacity-100"}`}
+            />
+            <span
+              className={`absolute left-0 top-[14px] block h-0.5 w-6 bg-ink transition-transform duration-300 ${open ? "-translate-y-[7px] -rotate-45" : ""}`}
+            />
+          </span>
+          <span className="hidden sm:inline">Menu</span>
+        </button>
+
         <Link to="/" className="flex items-center" aria-label="NKENTU, página inicial">
           {logo.src ? (
             <img src={logo.src} alt={logo.alt || "NKENTU"} className="h-16 w-auto object-contain sm:h-20" />
@@ -40,65 +63,25 @@ export default function Header() {
           )}
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
-          {NAV_LINKS.map((link) => (
-            <NavLink
-              key={link.href}
-              to={link.href}
-              end={link.href === "/"}
-              className={({ isActive }) =>
-                `text-sm font-medium tracking-wide transition-colors duration-200 hover:text-clay-300 ${
-                  isActive ? "text-clay-300" : "text-ink/80"
-                }`
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="hidden lg:block">
-          <Link to="/contacto" className="btn-primary">
-            Junte-se à NKENTU
-          </Link>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 lg:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
-        >
-          <span className="relative block h-4 w-5">
-            <span
-              className={`absolute left-0 top-0 block h-0.5 w-5 bg-ink transition-transform duration-300 ${open ? "translate-y-[7px] rotate-45" : ""}`}
-            />
-            <span
-              className={`absolute left-0 top-[7px] block h-0.5 w-5 bg-ink transition-opacity duration-200 ${open ? "opacity-0" : "opacity-100"}`}
-            />
-            <span
-              className={`absolute left-0 top-[14px] block h-0.5 w-5 bg-ink transition-transform duration-300 ${open ? "-translate-y-[7px] -rotate-45" : ""}`}
-            />
-          </span>
-        </button>
+        <Link to="/contacto" className="btn-primary hidden shrink-0 sm:inline-flex">
+          Junte-se à NKENTU
+        </Link>
       </div>
+    </header>
 
-      {open && (
-        <nav
-          id="mobile-menu"
-          className="border-t border-ink/10 bg-paper px-6 pb-8 pt-4 lg:hidden"
-          aria-label="Navegação móvel"
-        >
-          <ul className="flex flex-col divide-y divide-ink/10">
+    {open && (
+      <div id="site-menu" className="fixed inset-x-0 top-24 bottom-0 z-40 overflow-y-auto bg-paper">
+        <nav className="container-editorial py-10" aria-label="Navegação principal">
+          <ul className="flex flex-col divide-y divide-ink/10 border-t border-ink/10">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <NavLink
                   to={link.href}
                   end={link.href === "/"}
                   className={({ isActive }) =>
-                    `block py-4 font-display text-2xl ${isActive ? "text-clay-300" : "text-ink"}`
+                    `block py-5 font-display text-3xl transition-colors duration-200 sm:text-5xl ${
+                      isActive ? "text-clay-300" : "text-ink hover:text-clay-300"
+                    }`
                   }
                 >
                   {link.label}
@@ -106,11 +89,12 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          <Link to="/contacto" className="btn-primary mt-6 w-full">
+          <Link to="/contacto" className="btn-primary mt-10 w-full sm:hidden">
             Junte-se à NKENTU
           </Link>
         </nav>
-      )}
-    </header>
+      </div>
+    )}
+    </>
   );
 }
