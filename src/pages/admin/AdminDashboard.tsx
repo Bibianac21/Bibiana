@@ -8,6 +8,7 @@ const SHORTCUTS = [
   { label: "Parceiros", href: "/admin/parceiros", description: "Logótipos e descrições dos parceiros." },
   { label: "Equipa", href: "/admin/equipa", description: "Perfis da equipa NKENTU." },
   { label: "Homepage e Sobre", href: "/admin/homepage", description: "Hero, números de impacto, contacto e texto institucional." },
+  { label: "Subscritores", href: "/admin/subscritores", description: "Quem se inscreveu na newsletter, com exportação para CSV." },
 ];
 
 export default function AdminDashboard() {

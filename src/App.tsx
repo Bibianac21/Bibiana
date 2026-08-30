@@ -24,6 +24,7 @@ import { AdminGalleryList, AdminGalleryForm } from "./pages/admin/AdminGallery";
 import { AdminPartnersList, AdminPartnerForm } from "./pages/admin/AdminPartners";
 import { AdminTeamList, AdminTeamForm } from "./pages/admin/AdminTeam";
 import AdminHomepage from "./pages/admin/AdminHomepage";
+import AdminSubscribers from "./pages/admin/AdminSubscribers";
 
 function PublicLayout() {
   return (
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="equipa" element={<AdminTeamList />} />
           <Route path="equipa/:id" element={<AdminTeamForm />} />
           <Route path="homepage" element={<AdminHomepage />} />
+          <Route path="subscritores" element={<AdminSubscribers />} />
         </Route>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
