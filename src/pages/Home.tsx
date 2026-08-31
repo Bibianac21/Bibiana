@@ -45,38 +45,23 @@ export default function Home() {
             alt={content.hero.imagem.alt}
             className="h-full w-full origin-center animate-hero-zoom object-cover"
           />
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "linear-gradient(to top, rgba(24,15,32,0.97) 0%, rgba(24,15,32,0.95) 62%, rgba(24,15,32,0.55) 82%, rgba(24,15,32,0) 100%)",
-            }}
-          />
         </div>
-        <div className="container-editorial relative flex min-h-[540px] flex-col justify-end gap-5 pb-14 pt-32 sm:min-h-[620px] lg:min-h-[700px] lg:pb-20">
-          <Reveal>
+        <div className="container-editorial relative flex min-h-[480px] flex-col justify-end pb-10 pt-28 sm:min-h-[560px] lg:min-h-[620px] lg:pb-14">
+          <Reveal className="max-w-sm rounded-2xl bg-paper/85 p-6 backdrop-blur-sm sm:max-w-md sm:p-7">
             <p className="eyebrow text-ink">NKENTU</p>
-          </Reveal>
-          <Reveal delay={90}>
-            <h1 className="text-display-lg max-w-3xl text-balance uppercase text-ink [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
-              {content.hero.headline}
-            </h1>
-          </Reveal>
-          <Reveal delay={180}>
-            <p className="max-w-md text-lg text-ink/95 [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
-              {content.hero.subheadline}
-            </p>
-          </Reveal>
-          <Reveal delay={270} className="flex flex-wrap gap-4 pt-2">
-            <Link to={content.hero.ctaPrimaria.href} className="btn-primary bg-ochre-500 text-night hover:bg-ochre-300">
-              {content.hero.ctaPrimaria.label}
-            </Link>
-            <Link
-              to={content.hero.ctaSecundaria.href}
-              className="btn-secondary border-ink/60 text-ink hover:border-ink hover:bg-ink/15"
-            >
-              {content.hero.ctaSecundaria.label}
-            </Link>
+            <h1 className="text-display-md mt-3 text-balance uppercase text-ink">{content.hero.headline}</h1>
+            <p className="mt-3 text-base text-ink/90">{content.hero.subheadline}</p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link to={content.hero.ctaPrimaria.href} className="btn-primary bg-ochre-500 text-night hover:bg-ochre-300">
+                {content.hero.ctaPrimaria.label}
+              </Link>
+              <Link
+                to={content.hero.ctaSecundaria.href}
+                className="btn-secondary border-ink/60 text-ink hover:border-ink hover:bg-ink/15"
+              >
+                {content.hero.ctaSecundaria.label}
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>
