@@ -17,12 +17,12 @@ export default {
           soft: "#C9C2DA",
         },
         paper: {
-          DEFAULT: "#0D0B14",
-          warm: "#17131F",
+          DEFAULT: "#180F20",
+          warm: "#1F1428",
         },
         sand: {
-          DEFAULT: "#171320",
-          dark: "#221C30",
+          DEFAULT: "#1C1329",
+          dark: "#291C3B",
         },
         // Fixed dark color, independent of the ink/paper theme swap above —
         // for text placed on light accent chips (status badges) that stay
@@ -57,13 +57,13 @@ export default {
         },
       },
       fontFamily: {
-        display: ["'Fraunces'", "ui-serif", "Georgia", "serif"],
-        sans: ["'Work Sans'", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["'Anton'", "ui-sans-serif", "Impact", "sans-serif"],
+        sans: ["'Open Sans'", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       fontSize: {
-        "display-xl": ["clamp(2.75rem, 6vw, 6.5rem)", { lineHeight: "0.98", letterSpacing: "-0.02em" }],
-        "display-lg": ["clamp(2.25rem, 4.5vw, 4.25rem)", { lineHeight: "1.02", letterSpacing: "-0.02em" }],
-        "display-md": ["clamp(1.75rem, 3vw, 2.75rem)", { lineHeight: "1.05", letterSpacing: "-0.01em" }],
+        "display-xl": ["clamp(2.75rem, 6vw, 6.5rem)", { lineHeight: "0.94", letterSpacing: "0" }],
+        "display-lg": ["clamp(2.25rem, 4.5vw, 4.25rem)", { lineHeight: "0.98", letterSpacing: "0" }],
+        "display-md": ["clamp(1.75rem, 3vw, 2.75rem)", { lineHeight: "1.02", letterSpacing: "0" }],
       },
       maxWidth: {
         prose: "68ch",

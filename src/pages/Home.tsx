@@ -168,7 +168,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-display text-xl">{member.nome}</h3>
-                  <p className="text-sm font-medium text-clay-300">{member.funcao}</p>
+                  <p className="text-sm font-medium text-ochre-300">{member.funcao}</p>
                 </div>
               </Link>
             ))}

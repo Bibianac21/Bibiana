@@ -15,14 +15,14 @@ export default function Testimonials({ stories }: { stories: Story[] }) {
   return (
     <div>
       <figure className="rounded-3xl border border-ink/10 bg-paper-warm p-8 sm:p-12">
-        <span className="font-display text-6xl leading-none text-clay-300" aria-hidden="true">
+        <span className="font-display text-6xl leading-none text-ochre-300" aria-hidden="true">
           "
         </span>
         <blockquote className="mt-2 text-2xl leading-snug text-balance sm:text-3xl">{current.citacaoDestaque}</blockquote>
         <figcaption className="mt-8 flex items-center gap-4">
           <img src={current.fotografia.src} alt="" className="h-14 w-14 rounded-full object-cover" />
           <div>
-            <Link to={`/historias/${current.slug}`} className="font-semibold text-ink hover:text-clay-300">
+            <Link to={`/historias/${current.slug}`} className="font-semibold text-ink hover:text-ochre-300">
               {current.nome}
             </Link>
             <p className="text-sm text-ink/60">Ler a história completa</p>
@@ -41,7 +41,7 @@ export default function Testimonials({ stories }: { stories: Story[] }) {
                 aria-selected={i === index}
                 aria-label={`Testemunho ${i + 1}`}
                 onClick={() => setIndex(i)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${i === index ? "w-8 bg-clay-300" : "w-1.5 bg-ink/20"}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === index ? "w-8 bg-ochre-300" : "w-1.5 bg-ink/20"}`}
               />
             ))}
           </div>

@@ -47,14 +47,14 @@ export default function Header() {
               to={link.href}
               end={link.href === "/"}
               className={({ isActive }) =>
-                `group relative py-1 text-sm font-medium tracking-wide ${isActive ? "text-clay-300" : "text-ink/80 hover:text-ink"}`
+                `group relative py-1 text-sm font-medium tracking-wide ${isActive ? "text-ochre-300" : "text-ink/80 hover:text-ink"}`
               }
             >
               {({ isActive }) => (
                 <>
                   {link.label}
                   <span
-                    className={`absolute -bottom-0.5 left-0 h-0.5 bg-clay-300 transition-all duration-300 ease-editorial ${
+                    className={`absolute -bottom-0.5 left-0 h-0.5 bg-ochre-300 transition-all duration-300 ease-editorial ${
                       isActive ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   />
@@ -105,7 +105,7 @@ export default function Header() {
                   to={link.href}
                   end={link.href === "/"}
                   className={({ isActive }) =>
-                    `block py-4 font-display text-2xl ${isActive ? "text-clay-300" : "text-ink"}`
+                    `block py-4 font-display text-2xl ${isActive ? "text-ochre-300" : "text-ink"}`
                   }
                 >
                   {link.label}

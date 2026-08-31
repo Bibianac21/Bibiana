@@ -95,7 +95,7 @@ export default function About() {
                 </div>
                 <div>
                   <h3 className="font-display text-xl">{member.nome}</h3>
-                  <p className="text-sm font-medium text-clay-300">{member.funcao}</p>
+                  <p className="text-sm font-medium text-ochre-300">{member.funcao}</p>
                   <p className="mt-2 text-sm text-ink/70">{member.biografia}</p>
                 </div>
               </Reveal>

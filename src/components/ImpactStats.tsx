@@ -47,7 +47,7 @@ function StatItem({ numero }: { numero: ImpactNumber }) {
   return (
     <div>
       <dt className="sr-only">{numero.label}</dt>
-      <dd ref={ref} className="font-display text-display-md text-clay-300">
+      <dd ref={ref} className="font-display text-display-md text-ochre-300">
         {display}
       </dd>
       <p className="mt-1 text-sm text-ink/70">{numero.label}</p>

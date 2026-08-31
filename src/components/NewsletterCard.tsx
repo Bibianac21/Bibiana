@@ -17,7 +17,7 @@ export default function NewsletterCard({ newsletter }: { newsletter: Newsletter 
         />
       </div>
       <div className="flex flex-1 flex-col gap-3 p-6">
-        <p className="text-xs font-semibold uppercase tracking-wide text-clay-300">
+        <p className="text-xs font-semibold uppercase tracking-wide text-ochre-300">
           Edição nº{newsletter.edicao} · {formatDateLong(newsletter.data)}
         </p>
         <h3 className="font-display text-xl leading-snug text-balance">{newsletter.titulo}</h3>

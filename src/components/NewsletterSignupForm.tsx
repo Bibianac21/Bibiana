@@ -24,7 +24,7 @@ export default function NewsletterSignupForm({ compact = false }: NewsletterSign
   }
 
   const inputClasses = compact
-    ? "w-full rounded-lg border border-ink/25 bg-transparent px-4 py-2.5 text-sm text-ink placeholder:text-ink/40 focus-visible:ring-clay-300"
+    ? "w-full rounded-lg border border-ink/25 bg-transparent px-4 py-2.5 text-sm text-ink placeholder:text-ink/40 focus-visible:ring-ochre-300"
     : "w-full rounded-lg border border-ink/20 bg-paper px-5 py-3.5 text-sm text-ink placeholder:text-ink/40";
 
   if (status === "success") {
