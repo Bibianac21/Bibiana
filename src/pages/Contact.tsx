@@ -120,6 +120,18 @@ export default function Contact() {
                 <dt className="font-semibold">Endereço:</dt>
                 <dd>{contacto.endereco}</dd>
               </div>
+              {contacto.googleMapsUrl && (
+                <div className="pt-1">
+                  <a
+                    href={contacto.googleMapsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm font-semibold underline decoration-clay-500 underline-offset-4"
+                  >
+                    Ver no Google Maps
+                  </a>
+                </div>
+              )}
             </dl>
           </div>
           <div>

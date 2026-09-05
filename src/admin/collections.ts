@@ -151,6 +151,12 @@ export const SITE_SETTINGS_FIELDS: FieldConfig[] = [
   { key: "contacto.telefone", label: "Contacto — telefone", type: "text" },
   { key: "contacto.endereco", label: "Contacto — endereço", type: "text" },
   {
+    key: "contacto.googleMapsUrl",
+    label: "Contacto — link do Google Maps",
+    type: "text",
+    hint: "Google Maps → localização → Partilhar → Copiar link.",
+  },
+  {
     key: "contacto.redesSociais",
     label: "Redes sociais",
     type: "repeater",

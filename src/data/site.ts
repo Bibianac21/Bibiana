@@ -57,6 +57,8 @@ export const siteSettings = {
     email: "geral@nkentu.org",
     telefone: "+244 923 000 000",
     endereco: "Rua da Missão, 45, Rangel, Luanda, Angola",
+    // Cola aqui o link de partilha do Google Maps (Google Maps → localização → Partilhar → Copiar link).
+    googleMapsUrl: "",
     redesSociais: [
       { label: "Instagram", href: "https://instagram.com/nkentu" },
       { label: "Facebook", href: "https://facebook.com/nkentu" },
