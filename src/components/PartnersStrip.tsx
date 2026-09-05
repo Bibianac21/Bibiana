@@ -9,7 +9,7 @@ export default function PartnersStrip({ partners }: { partners: Partner[] }) {
             src={partner.logotipo.src}
             alt={partner.logotipo.alt}
             loading="lazy"
-            className="h-16 w-full rounded-xl border border-ink/10 bg-white object-cover grayscale transition duration-300 ease-editorial group-hover:grayscale-0"
+            className="h-20 w-full rounded-xl border border-ink/10 bg-white object-contain p-4 grayscale transition duration-300 ease-editorial group-hover:grayscale-0"
           />
         );
         return (
