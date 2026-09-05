@@ -80,6 +80,128 @@ export default function FieldRenderer<T>({ field, value, onChange }: FieldRender
     );
   }
 
+  if (field.type === "photoSet") {
+    type Photo = { src?: string; alt?: string };
+    const coverKey = field.coverKey ?? field.key;
+    const cover = (getPath(value, coverKey) as Photo | undefined) ?? {};
+    const extraRaw = getPath(value, field.key);
+    const extra = Array.isArray(extraRaw) ? (extraRaw as Photo[]) : [];
+    const hasCover = Boolean(cover.src);
+    const photos: (Photo & { isCover: boolean })[] = [
+      ...(hasCover ? [{ ...cover, isCover: true }] : []),
+      ...extra.map((photo) => ({ ...photo, isCover: false })),
+    ];
+
+    function setCoverAndExtra(nextCover: Photo, nextExtra: Photo[]) {
+      onChange(setPath(setPath(value, coverKey, nextCover), field.key, nextExtra));
+    }
+
+    function extraIndexFor(photoIndex: number) {
+      return hasCover ? photoIndex - 1 : photoIndex;
+    }
+
+    function makeCover(photoIndex: number) {
+      const extraIndex = extraIndexFor(photoIndex);
+      const chosen = extra[extraIndex];
+      const rest = extra.filter((_, i) => i !== extraIndex);
+      setCoverAndExtra(chosen, hasCover ? [cover, ...rest] : rest);
+    }
+
+    function removePhoto(photoIndex: number) {
+      if (photoIndex === 0 && hasCover) {
+        const [next, ...rest] = extra;
+        setCoverAndExtra(next ?? {}, rest);
+      } else {
+        const extraIndex = extraIndexFor(photoIndex);
+        setCoverAndExtra(cover, extra.filter((_, i) => i !== extraIndex));
+      }
+    }
+
+    function updateAlt(photoIndex: number, alt: string) {
+      if (photoIndex === 0 && hasCover) {
+        setCoverAndExtra({ ...cover, alt }, extra);
+      } else {
+        const extraIndex = extraIndexFor(photoIndex);
+        const nextExtra = [...extra];
+        nextExtra[extraIndex] = { ...nextExtra[extraIndex], alt };
+        setCoverAndExtra(cover, nextExtra);
+      }
+    }
+
+    async function addFiles(fileList: FileList | null) {
+      const files = Array.from(fileList ?? []);
+      if (files.length === 0) return;
+      setUploading(true);
+      try {
+        let nextCover = cover;
+        let nextExtra = [...extra];
+        for (const file of files) {
+          const url = await uploadImage(file);
+          const asset: Photo = { src: url, alt: "" };
+          if (!nextCover.src) {
+            nextCover = asset;
+          } else {
+            nextExtra = [...nextExtra, asset];
+          }
+        }
+        setCoverAndExtra(nextCover, nextExtra);
+      } catch (error) {
+        alert(error instanceof Error ? error.message : "Falha no envio das fotos.");
+      } finally {
+        setUploading(false);
+      }
+    }
+
+    return (
+      <fieldset className="rounded-xl border border-ink/15 p-4">
+        <legend className="px-1 text-sm font-semibold text-ink">{field.label}</legend>
+        {field.hint && <p className="mb-3 text-xs text-ink/50">{field.hint}</p>}
+        {photos.length > 0 && (
+          <div className="mb-4 flex flex-wrap gap-3">
+            {photos.map((photo, i) => (
+              <div key={(photo.src ?? "") + i} className="w-28">
+                <div className="relative">
+                  <img src={photo.src} alt={photo.alt ?? ""} className="h-28 w-28 rounded-lg object-cover" />
+                  {photo.isCover && (
+                    <span className="absolute left-1 top-1 rounded-full bg-ochre-500 px-2 py-0.5 text-[10px] font-semibold uppercase text-paper">
+                      Capa
+                    </span>
+                  )}
+                </div>
+                <input
+                  type="text"
+                  placeholder="Texto alternativo"
+                  value={photo.alt ?? ""}
+                  onChange={(event) => updateAlt(i, event.target.value)}
+                  className="mt-1 w-full rounded border border-ink/20 bg-transparent px-1.5 py-1 text-xs text-ink"
+                />
+                <div className="mt-1 flex flex-col items-start gap-0.5">
+                  {!photo.isCover && (
+                    <button type="button" onClick={() => makeCover(i)} className="btn-text text-xs">
+                      Tornar capa
+                    </button>
+                  )}
+                  <button type="button" onClick={() => removePhoto(i)} className="btn-text text-xs text-clay-300">
+                    Remover
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          disabled={uploading}
+          onChange={(event) => addFiles(event.target.files)}
+          className="block text-sm"
+        />
+        {uploading && <p className="mt-1 text-xs text-ink/50">A enviar…</p>}
+      </fieldset>
+    );
+  }
+
   if (field.type === "image") {
     const image = (raw as { src?: string; alt?: string } | undefined) ?? {};
     return (
