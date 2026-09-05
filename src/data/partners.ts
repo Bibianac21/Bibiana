@@ -1,56 +1,34 @@
-import { photo } from "../lib/images";
 import { getSupabaseClient } from "../lib/supabase";
 import type { Partner } from "../types/content";
 
+// Parceiros reais da NKENTU, a partir do brand board oficial. As descrições
+// abaixo são provisórias — ajusta-as em /admin/parceiros conforme o texto
+// que preferires para cada parceria.
 export const partners: Partner[] = [
-  {
-    id: "fundacao-kwanza",
-    nome: "Fundação Kwanza",
-    logotipo: { src: photo("logo-kwanza", 400, 200), alt: "Logótipo da Fundação Kwanza" },
-    website: "https://exemplo.org/fundacao-kwanza",
-    descricao:
-      "Apoia programas de formação profissional e financia bolsas para participantes com menos recursos.",
-  },
-  {
-    id: "banco-uniao",
-    nome: "Banco União",
-    logotipo: { src: photo("logo-banco-uniao", 400, 200), alt: "Logótipo do Banco União" },
-    website: "https://exemplo.org/banco-uniao",
-    descricao: "Parceiro financeiro do programa de mentorias em empreendedorismo.",
-  },
-  {
-    id: "camara-luanda",
-    nome: "Câmara Municipal de Luanda",
-    logotipo: { src: photo("logo-camara-luanda", 400, 200), alt: "Logótipo da Câmara Municipal de Luanda" },
-    descricao: "Cede espaços públicos para workshops e eventos comunitários.",
-  },
-  {
-    id: "instituto-huila",
-    nome: "Instituto Huíla Cresce",
-    logotipo: { src: photo("logo-huila", 400, 200), alt: "Logótipo do Instituto Huíla Cresce" },
-    website: "https://exemplo.org/huila-cresce",
-    descricao: "Co-organiza formações técnicas na região sul, em parceria com escolas locais.",
-  },
-  {
-    id: "rede-mulheres-tech",
-    nome: "Rede Mulheres em Tech Angola",
-    logotipo: { src: photo("logo-mulheres-tech", 400, 200), alt: "Logótipo da Rede Mulheres em Tech Angola" },
-    website: "https://exemplo.org/mulheres-tech",
-    descricao: "Traz mentoras voluntárias da área de tecnologia para o programa de mentorias.",
-  },
-  {
-    id: "cooperativa-benguela",
-    nome: "Cooperativa Benguela Têxtil",
-    logotipo: { src: photo("logo-benguela-textil", 400, 200), alt: "Logótipo da Cooperativa Benguela Têxtil" },
-    descricao: "Acolhe estágios práticos para participantes da formação em costura e design têxtil.",
-  },
   {
     id: "goethe-institut",
     nome: "Goethe-Institut",
-    // Placeholder — substituir pelo logótipo real do Goethe-Institut via /admin.
-    logotipo: { src: photo("logo-goethe-institut", 400, 200), alt: "Logótipo do Goethe-Institut" },
+    logotipo: { src: "/brand/partners/goethe-institut.jpg", alt: "Logótipo do Goethe-Institut" },
     website: "https://www.goethe.de/ins/ao/pt/index.html",
     descricao: "Parceiro dos ciclos de cinema e conversa e das oficinas criativas da NKENTU em Luanda.",
+  },
+  {
+    id: "rompe",
+    nome: "ROMPE",
+    logotipo: { src: "/brand/partners/rompe.jpg", alt: "Logótipo da ROMPE" },
+    descricao: "Parceiro criativo da NKENTU.",
+  },
+  {
+    id: "ondjango-feminista",
+    nome: "Ondjango Feminista",
+    logotipo: { src: "/brand/partners/ondjango-feminista.jpg", alt: "Logótipo da Ondjango Feminista" },
+    descricao: "Parceiro em iniciativas feministas e de capacitação de mulheres.",
+  },
+  {
+    id: "unu",
+    nome: "UNU",
+    logotipo: { src: "/brand/partners/unu.png", alt: "Logótipo da UNU" },
+    descricao: "Parceiro da NKENTU.",
   },
 ];
 

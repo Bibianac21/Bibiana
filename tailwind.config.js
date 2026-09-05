@@ -30,19 +30,34 @@ export default {
         night: {
           DEFAULT: "#1C1A17",
         },
+        // Palette exactly as sampled from the official NKENTU brand board
+        // (logo + colour swatches): purple #804AFB, orange #FD6702,
+        // turquoise #0BE7C9, magenta #D70397, plus black/white.
         clay: {
-          50: "#F4EFFE",
-          100: "#E5D9FD",
-          300: "#B79BFA",
-          500: "#8B5CF6",
-          600: "#7C3FE0",
-          700: "#5B21B6",
+          50: "#F9F6FF",
+          100: "#ECE4FE",
+          300: "#B392FD",
+          500: "#804AFB",
+          600: "#663BC9",
+          700: "#46298A",
         },
         ochre: {
-          100: "#FFE3C2",
-          300: "#FFAF66",
-          500: "#FF7A1A",
-          700: "#C2540A",
+          100: "#FFE1CC",
+          300: "#FEA467",
+          500: "#FD6702",
+          700: "#B14801",
+        },
+        turquoise: {
+          100: "#CFFBF3",
+          300: "#6DF1DF",
+          500: "#0BE7C9",
+          700: "#08A491",
+        },
+        magenta: {
+          100: "#F9D2EB",
+          300: "#E768C1",
+          500: "#D70397",
+          700: "#95026A",
         },
         moss: {
           100: "#DCE2CE",
@@ -57,8 +72,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ["'Anton'", "ui-sans-serif", "Impact", "sans-serif"],
-        sans: ["'Open Sans'", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["'Fredoka'", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["'Archivo'", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       fontSize: {
         "display-xl": ["clamp(2.75rem, 6vw, 6.5rem)", { lineHeight: "0.94", letterSpacing: "0" }],

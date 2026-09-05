@@ -4,9 +4,9 @@ import type { ImpactNumber } from "../types/content";
 
 export const siteSettings = {
   nome: "NKENTU",
-  // Vazio por omissão: sem logótipo carregado, o cabeçalho mostra o nome
-  // "NKENTU" em texto. Faz upload do logótipo real em /admin/homepage.
-  logo: { src: "", alt: "Logótipo da NKENTU" },
+  // Logótipo real da NKENTU (versão branca, do brand board oficial).
+  // Podes trocar por outra variante de cor em /admin/homepage.
+  logo: { src: "/brand/logo-white.png", alt: "Logótipo da NKENTU" },
   descricaoCurta:
     "Projecto social angolano dedicado à capacitação e desenvolvimento de mulheres, através de formação, workshops, mentorias e criação de oportunidades.",
   hero: {
