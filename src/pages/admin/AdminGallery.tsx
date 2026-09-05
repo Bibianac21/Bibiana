@@ -56,11 +56,12 @@ export function AdminGalleryForm() {
 const inputClasses = "w-full rounded-lg border border-ink/20 bg-transparent px-3 py-2 text-sm text-ink";
 
 /**
- * Creating gallery items is the one flow where uploading a single photo at
+ * Creating a gallery item is the one flow where uploading a single photo at
  * a time is real friction — an event usually produces a batch. This lets
- * you pick several files at once and reuses one set of metadata (título,
- * legenda, categoria, data) across all of them; each photo becomes its own
- * row that can still be edited individually afterwards.
+ * you pick every photo from that event/actividade at once and saves them
+ * as a single album (one card in the public gallery grid, with all the
+ * photos inside it) instead of one card per photo. The first photo chosen
+ * becomes the cover; that can be changed afterwards when editing the item.
  */
 function AdminGalleryBulkForm() {
   const navigate = useNavigate();
@@ -92,21 +93,24 @@ function AdminGalleryBulkForm() {
     setError(null);
     setProgress({ done: 0, total: files.length });
     try {
+      const urls: string[] = [];
       for (let i = 0; i < files.length; i++) {
-        const url = await uploadImage(files[i]);
-        const row: GalleryItem = {
-          id: crypto.randomUUID(),
-          imagem: { src: url, alt: titulo || legenda },
-          titulo,
-          legenda,
-          categoria,
-          tipo,
-          data,
-          ...(actividadeSlug ? { actividadeSlug } : {}),
-        };
-        await upsertRow(TABLE, row);
+        urls.push(await uploadImage(files[i]));
         setProgress({ done: i + 1, total: files.length });
       }
+      const [capaUrl, ...restoUrls] = urls;
+      const row: GalleryItem = {
+        id: crypto.randomUUID(),
+        imagem: { src: capaUrl, alt: titulo || legenda },
+        imagens: restoUrls.map((url) => ({ src: url, alt: titulo || legenda })),
+        titulo,
+        legenda,
+        categoria,
+        tipo,
+        data,
+        ...(actividadeSlug ? { actividadeSlug } : {}),
+      };
+      await upsertRow(TABLE, row);
       navigate(BASE);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Falha ao enviar as fotos.");
@@ -118,15 +122,15 @@ function AdminGalleryBulkForm() {
   return (
     <div className="max-w-3xl">
       <div className="mb-8 flex items-center justify-between">
-        <h1 className="font-display text-3xl">Novas fotos</h1>
+        <h1 className="font-display text-3xl">Novo álbum</h1>
         <a href={BASE} className="btn-text">
           ← Voltar
         </a>
       </div>
 
       <p className="mb-6 text-sm text-ink/60">
-        Escolhe várias fotos de uma vez. Título, legenda, categoria e data ficam iguais para todas — depois podes
-        ajustar cada uma individualmente na lista da Galeria.
+        Escolhe todas as fotos deste evento/actividade de uma vez — ficam juntas num único cartão da galeria. A
+        primeira foto escolhida é usada como capa; podes trocar depois, ao editar o item.
       </p>
 
       <div className="space-y-6">
@@ -215,7 +219,7 @@ function AdminGalleryBulkForm() {
 
       <div className="mt-8 flex items-center gap-4">
         <button type="button" onClick={handleSave} disabled={saving} className="btn-primary">
-          {saving && progress ? `A enviar ${progress.done}/${progress.total}…` : saving ? "A enviar…" : "Guardar todas"}
+          {saving && progress ? `A enviar ${progress.done}/${progress.total}…` : saving ? "A enviar…" : "Guardar álbum"}
         </button>
       </div>
     </div>
