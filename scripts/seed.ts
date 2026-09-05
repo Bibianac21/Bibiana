@@ -74,7 +74,7 @@ async function main() {
   );
   await upsert("stories", withDefaults(stories, { galeria: [], destaque: false }));
   await upsert("newsletters", withDefaults(newsletters, { galeria: [], destaque: false }));
-  await upsert("gallery_items", [...galleryItems, ...galleryVideos]);
+  await upsert("gallery_items", withDefaults([...galleryItems, ...galleryVideos], { imagens: [] }));
 
   await upsert(
     "site_settings",

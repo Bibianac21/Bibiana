@@ -30,6 +30,11 @@ export default function GalleryGrid({ items }: { items: GalleryItem[] }) {
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-paper/90 text-ink">▶</span>
               </span>
             )}
+            {item.imagens && item.imagens.length > 0 && (
+              <span className="absolute right-2 top-2 rounded-full bg-paper/80 px-2 py-1 text-xs font-semibold text-ink">
+                +{item.imagens.length}
+              </span>
+            )}
             <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-paper/80 to-transparent p-3 text-left text-xs font-medium text-ink opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               {item.titulo}
             </span>

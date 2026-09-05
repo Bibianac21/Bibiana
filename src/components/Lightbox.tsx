@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import type { GalleryItem } from "../types/content";
 import { GALLERY_CATEGORY_LABELS } from "../types/content";
@@ -13,6 +13,13 @@ interface LightboxProps {
 
 export default function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
   const item = items[index];
+  const photos = item ? [item.imagem, ...(item.imagens ?? [])] : [];
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  // Reset to the item's first photo whenever a different grid item opens.
+  useEffect(() => {
+    setPhotoIndex(0);
+  }, [index]);
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -64,10 +71,32 @@ export default function Lightbox({ items, index, onClose, onNavigate }: Lightbox
         onClick={(event) => event.stopPropagation()}
       >
         <img
-          src={item.imagem.src}
-          alt={item.imagem.alt}
+          src={photos[photoIndex].src}
+          alt={photos[photoIndex].alt}
           className="max-h-[65vh] w-full rounded-lg object-contain"
         />
+        {photos.length > 1 && (
+          <div className="flex justify-center gap-2 overflow-x-auto" role="tablist" aria-label="Fotos deste item">
+            {photos.map((photo, i) => (
+              <button
+                key={photo.src + i}
+                type="button"
+                role="tab"
+                aria-selected={i === photoIndex}
+                aria-label={`Foto ${i + 1} de ${photos.length}`}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setPhotoIndex(i);
+                }}
+                className={`h-14 w-14 shrink-0 overflow-hidden rounded-md border-2 transition-colors ${
+                  i === photoIndex ? "border-ochre-300" : "border-transparent opacity-60 hover:opacity-100"
+                }`}
+              >
+                <img src={photo.src} alt="" className="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
         <div className="text-ink">
           <p className="font-display text-xl">{item.titulo}</p>
           <p className="mt-1 text-sm text-ink/70">{item.legenda}</p>

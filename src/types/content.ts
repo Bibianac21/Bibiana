@@ -134,6 +134,8 @@ export const GALLERY_CATEGORY_LABELS: Record<GalleryCategory, string> = {
 export interface GalleryItem {
   id: string;
   imagem: ImageAsset;
+  /** Fotos adicionais do mesmo item — permite agrupar várias fotos de uma actividade num só cartão da galeria. */
+  imagens?: ImageAsset[];
   titulo: string;
   legenda: string;
   categoria: GalleryCategory;

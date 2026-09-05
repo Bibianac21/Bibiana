@@ -97,7 +97,14 @@ export const GALLERY_ITEM_FIELDS: FieldConfig[] = [
     ],
   },
   { key: "data", label: "Data", type: "date", required: true },
-  { key: "imagem", label: "Imagem", type: "image" },
+  { key: "imagem", label: "Imagem de capa", type: "image" },
+  {
+    key: "imagens",
+    label: "Mais fotos deste item",
+    type: "repeater",
+    repeaterFields: [{ key: "", label: "Foto", type: "image" }],
+    hint: "Junta aqui as restantes fotos da mesma actividade/sessão, para ficarem todas neste único cartão da galeria.",
+  },
   { key: "actividadeSlug", label: "Slug da actividade relacionada (opcional)", type: "text" },
 ];
 
