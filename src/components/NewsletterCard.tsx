@@ -22,7 +22,9 @@ export default function NewsletterCard({ newsletter }: { newsletter: Newsletter 
         </p>
         <h3 className="font-display text-xl leading-snug text-balance">{newsletter.titulo}</h3>
         <p className="text-sm text-ink/70">{newsletter.resumo}</p>
-        <span className="btn-text mt-1 self-start">Ler edição</span>
+        <span className="mt-1 inline-flex w-fit items-center gap-2 rounded-lg bg-ochre-500 px-5 py-2.5 text-sm font-semibold text-paper transition-colors duration-300 ease-editorial group-hover:bg-ochre-300">
+          Ler a edição completa →
+        </span>
       </div>
     </Link>
   );

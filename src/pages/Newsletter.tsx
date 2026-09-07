@@ -23,12 +23,17 @@ export default function Newsletter() {
           </p>
         </div>
         <div className="rounded-3xl border border-ink/10 bg-sand p-8">
+          <p className="mb-6 text-sm leading-relaxed text-ink/70">
+            Um resumo mensal do que se passou nos nossos encontros, das próximas formações e das oportunidades
+            abertas para quem faz parte da NKENTU — direto na sua caixa de entrada.
+          </p>
           <NewsletterSignupForm />
         </div>
       </section>
 
       <section className="container-editorial pb-24">
-        <h2 className="font-display text-2xl">Últimas newsletters</h2>
+        <p className="eyebrow">Arquivo</p>
+        <h2 className="font-display mt-3 text-2xl">Últimas edições</h2>
         <div className="mt-8 grid gap-6">
           {newsletters.map((newsletter) => (
             <NewsletterCard key={newsletter.id} newsletter={newsletter} />

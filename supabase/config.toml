@@ -1,0 +1,10 @@
+# Supabase CLI configuration for Edge Functions (see README "Envio de
+# newsletters por email"). Deploy with:
+#   supabase functions deploy send-newsletter
+#   supabase functions deploy unsubscribe-newsletter
+
+[functions.send-newsletter]
+verify_jwt = true
+
+[functions.unsubscribe-newsletter]
+verify_jwt = false

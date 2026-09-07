@@ -1,7 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
 import NotFound from "./NotFound";
+import ImpactStats from "../components/ImpactStats";
+import FinalCta from "../components/FinalCta";
 import { getNewsletterBySlug, getNewsletters, fetchNewsletterBySlug, fetchNewsletters } from "../data/newsletters";
+import { siteSettings, fetchSiteContent } from "../data/site";
 import { useLiveData } from "../lib/useLiveData";
 import { formatDateLong } from "../lib/format";
 
@@ -13,6 +16,7 @@ export default function NewsletterDetail() {
     [slug],
   );
   const all = useLiveData(getNewsletters(), fetchNewsletters);
+  const impacto = useLiveData(siteSettings.impacto, async () => (await fetchSiteContent()).impacto);
 
   if (!newsletter) return <NotFound />;
 
@@ -46,6 +50,11 @@ export default function NewsletterDetail() {
           <img src={newsletter.imagem.src} alt={newsletter.imagem.alt} className="h-full w-full object-cover" />
         </div>
 
+        <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-ink/10 bg-sand p-7 sm:p-10">
+          <p className="eyebrow">Destaque do mês</p>
+          <p className="mt-4 text-xl leading-relaxed text-ink sm:text-2xl">{newsletter.resumo}</p>
+        </div>
+
         <div className="mx-auto mt-10 max-w-prose space-y-6 text-lg leading-relaxed text-ink/80">
           {newsletter.conteudo.map((paragrafo, i) => (
             <p key={i}>{paragrafo}</p>
@@ -64,7 +73,18 @@ export default function NewsletterDetail() {
             </div>
           </div>
         )}
+
+        {impacto.numeros.length > 0 && (
+          <div className="mx-auto mt-16 max-w-3xl rounded-2xl border border-ink/10 bg-sand p-7 sm:p-10">
+            <p className="eyebrow justify-center">Impacto em números</p>
+            <div className="mt-6">
+              <ImpactStats numeros={impacto.numeros} />
+            </div>
+          </div>
+        )}
       </article>
+
+      <FinalCta />
 
       <nav className="border-t border-ink/10 bg-sand py-10" aria-label="Navegação entre edições">
         <div className="container-editorial flex items-center justify-between gap-4">

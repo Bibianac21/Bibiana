@@ -113,6 +113,8 @@ export interface Newsletter {
   conteudo: string[];
   galeria?: ImageAsset[];
   destaque?: boolean;
+  /** Set by the send-newsletter Edge Function once this edition has been emailed to subscribers. */
+  enviada_em?: string | null;
   seo: SeoFields;
 }
 

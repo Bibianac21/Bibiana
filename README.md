@@ -127,6 +127,39 @@ Sem estas variáveis definidas, tanto o site público como `/admin` continuam
 a funcionar — o público mostra os dados fictícios, e `/admin` mostra um
 ecrã a explicar os passos acima em vez do formulário de login.
 
+### Envio de newsletters por email
+
+Cada edição pode ser enviada, por email, a todas as pessoas inscritas em
+`newsletter_subscribers` — botão "Enviar aos inscritos" no formulário de
+edição de uma newsletter em `/admin/newsletters`. O email usa o mesmo
+template visual escuro (laranja/roxo, Baloo 2 + Work Sans) das páginas
+`/newsletter` do site — ver `supabase/functions/_shared/newsletterEmail.ts`.
+
+Isto usa uma Edge Function do Supabase e o serviço [Resend](https://resend.com)
+para o envio em si — nenhum dos dois está activo por omissão. Para ligar:
+
+1. Instalar a [Supabase CLI](https://supabase.com/docs/guides/cli) e fazer
+   `supabase login` + `supabase link --project-ref <ref-do-projecto>`.
+2. Correr `supabase/migrations/0005_add_newsletter_enviada_em.sql` no SQL
+   editor do projecto (à semelhança das migrações anteriores).
+3. Criar uma conta em [resend.com](https://resend.com) (tem um plano
+   gratuito). Para testar já é possível enviar a partir de
+   `onboarding@resend.dev`; para enviar com o domínio da NKENTU (ex.:
+   `newsletter@nkentu.org`) é preciso verificar esse domínio em Resend
+   (adicionar os registos DNS que o Resend indicar).
+4. Definir os secrets do projecto Supabase (`supabase secrets set` ou
+   Dashboard → Edge Functions → Secrets):
+   - `RESEND_API_KEY` — gerada em Resend → API Keys.
+   - `RESEND_FROM_EMAIL` — ex.: `"NKENTU <newsletter@nkentu.org>"`.
+   - `SITE_URL` — o domínio público do site, sem barra final (ex.:
+     `https://nkentu.org`), usado para os links dentro do email.
+5. `supabase functions deploy send-newsletter` e
+   `supabase functions deploy unsubscribe-newsletter`.
+
+Sem estes passos, o botão "Enviar aos inscritos" mostra uma mensagem de erro
+explicando o que falta configurar — o resto do site e do `/admin` continuam
+a funcionar normalmente.
+
 ### Limitações conhecidas do `/admin` actual
 
 - A relação entre uma actividade e os seus parceiros (`parceiroIds`) é um
