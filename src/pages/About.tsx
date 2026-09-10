@@ -22,7 +22,7 @@ export default function About() {
     <>
       <Seo
         title="Sobre — NKENTU"
-        description="Quem é a NKENTU, a nossa missão, o que fazemos, como trabalhamos, a nossa comunidade, equipa e parceiros."
+        description="Quem é a NKENTU, a nossa missão, visão, o que fazemos, como trabalhamos, equipa, voluntárias e parceiros."
       />
 
       <header className="container-editorial grid gap-10 pb-16 pt-14 sm:pt-20 lg:grid-cols-2 lg:items-center">
@@ -38,32 +38,45 @@ export default function About() {
         </Reveal>
       </header>
 
-      <section className="border-y border-ink/10 bg-sand py-16 sm:py-24">
-        <Reveal className="container-editorial grid gap-12 lg:grid-cols-2">
+      {content.sobre.historia && (
+        <section className="border-y border-ink/10 bg-sand py-16 sm:py-24">
+          <Reveal className="container-editorial">
+            <h2 className="font-display text-2xl">Nossa história</h2>
+            <p className="mt-4 max-w-prose text-lg leading-relaxed text-ink/80">{content.sobre.historia}</p>
+          </Reveal>
+        </section>
+      )}
+
+      <section className="container-editorial py-16 sm:py-24">
+        <Reveal className="grid gap-12 lg:grid-cols-2">
           <div>
             <h2 className="font-display text-2xl">A nossa missão</h2>
             <p className="mt-4 max-w-prose text-lg leading-relaxed text-ink/80">{content.sobre.missao}</p>
           </div>
-          <div>
-            <h2 className="font-display text-2xl">Como trabalhamos</h2>
-            <p className="mt-4 max-w-prose text-lg leading-relaxed text-ink/80">{content.sobre.comoTrabalhamos}</p>
-          </div>
+          {content.sobre.visao && (
+            <div>
+              <h2 className="font-display text-2xl">A nossa visão</h2>
+              <p className="mt-4 max-w-prose text-lg leading-relaxed text-ink/80">{content.sobre.visao}</p>
+            </div>
+          )}
         </Reveal>
       </section>
 
-      <section className="container-editorial py-16 sm:py-24">
-        <Reveal>
-          <h2 className="font-display text-2xl">O que fazemos</h2>
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-            {content.sobre.oQueFazemos.map((item) => (
-              <li key={item} className="flex gap-3 rounded-xl border border-ink/10 p-5 text-ink/80">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-clay-500" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-      </section>
+      {content.sobre.actividadesPrincipais && content.sobre.actividadesPrincipais.length > 0 && (
+        <section className="border-t border-ink/10 bg-sand py-16 sm:py-24">
+          <Reveal className="container-editorial">
+            <h2 className="font-display text-2xl">O que fazemos</h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {content.sobre.actividadesPrincipais.map((item) => (
+                <div key={item.titulo} className="rounded-xl border border-ink/10 bg-paper p-5">
+                  <h3 className="font-display text-lg">{item.titulo}</h3>
+                  <p className="mt-2 text-sm text-ink/70">{item.descricao}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </section>
+      )}
 
       <section className="bg-clay-700 py-16 text-ink sm:py-24">
         <Reveal className="container-editorial grid gap-12 lg:grid-cols-2 lg:items-start">
@@ -75,12 +88,54 @@ export default function About() {
         </Reveal>
       </section>
 
-      <section className="container-editorial py-16 sm:py-24">
-        <Reveal>
-          <h2 className="font-display text-2xl">A nossa comunidade</h2>
-          <p className="mt-4 max-w-prose text-lg leading-relaxed text-ink/80">{content.sobre.comunidade}</p>
-        </Reveal>
-      </section>
+      {content.sobre.publicoAlvo && content.sobre.publicoAlvo.length > 0 && (
+        <section className="container-editorial py-16 sm:py-24">
+          <Reveal>
+            <h2 className="font-display text-2xl">Nosso público-alvo</h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {content.sobre.publicoAlvo.map((item) => (
+                <div key={item.titulo} className="rounded-xl border border-ink/10 p-5">
+                  <h3 className="font-display text-lg text-ochre-300">{item.titulo}</h3>
+                  <p className="mt-2 text-sm text-ink/70">{item.descricao}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </section>
+      )}
+
+      {content.sobre.valores && content.sobre.valores.length > 0 && (
+        <section className="border-t border-ink/10 bg-sand py-16 sm:py-24">
+          <Reveal className="container-editorial">
+            <h2 className="font-display text-2xl">Nossos valores</h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {content.sobre.valores.map((item) => (
+                <div key={item.titulo} className="rounded-xl border border-ink/10 bg-paper p-5">
+                  <h3 className="font-display text-lg">{item.titulo}</h3>
+                  <p className="mt-2 text-sm text-ink/70">{item.descricao}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </section>
+      )}
+
+      {content.sobre.comoTrabalhamosPassos && content.sobre.comoTrabalhamosPassos.length > 0 && (
+        <section className="container-editorial py-16 sm:py-24">
+          <Reveal>
+            <h2 className="font-display text-2xl">Como trabalhamos</h2>
+            <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {content.sobre.comoTrabalhamosPassos.map((passo, i) => (
+                <li key={passo.titulo} className="rounded-xl border border-ink/10 p-5">
+                  <span className="font-display text-2xl text-ochre-300">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="mt-2 font-display text-lg">{passo.titulo}</h3>
+                  <p className="mt-2 text-sm text-ink/70">{passo.descricao}</p>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        </section>
+      )}
 
       <section id="equipa" className="border-t border-ink/10 bg-sand py-16 sm:py-24">
         <div className="container-editorial">
@@ -101,6 +156,22 @@ export default function About() {
               </Reveal>
             ))}
           </div>
+
+          {content.sobre.voluntarios && content.sobre.voluntarios.length > 0 && (
+            <div className="mt-16">
+              <Reveal>
+                <h3 className="font-display text-xl">Voluntárias e voluntários</h3>
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {content.sobre.voluntarios.map((pessoa) => (
+                    <li key={pessoa.nome} className="rounded-xl border border-ink/10 bg-paper px-5 py-4">
+                      <p className="font-medium text-ink">{pessoa.nome}</p>
+                      <p className="text-sm text-ink/60">{pessoa.funcao}</p>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            </div>
+          )}
         </div>
       </section>
 

@@ -65,7 +65,9 @@ export default function Footer() {
 
       <div className="border-t border-ink/10 py-6">
         <div className="container-editorial flex flex-col gap-2 text-xs text-ink/50 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} NKENTU. Todos os direitos reservados.</p>
+          <p>
+            © {new Date().getFullYear()} {siteSettings.nomeLegal} · NIF {siteSettings.nif}. Todos os direitos reservados.
+          </p>
           <p>{contacto.endereco}</p>
         </div>
       </div>

@@ -173,10 +173,54 @@ export const SITE_SETTINGS_FIELDS: FieldConfig[] = [
   },
   { key: "sobre.imagem", label: "Sobre — imagem de cabeçalho", type: "image" },
   { key: "sobre.quemE", label: "Sobre — quem é a NKENTU", type: "textarea" },
+  { key: "sobre.historia", label: "Sobre — nossa história", type: "textarea" },
   { key: "sobre.missao", label: "Sobre — missão", type: "textarea" },
-  { key: "sobre.oQueFazemos", label: "Sobre — o que fazemos", type: "lines" },
-  { key: "sobre.comoTrabalhamos", label: "Sobre — como trabalhamos", type: "textarea" },
-  { key: "sobre.comunidade", label: "Sobre — a nossa comunidade", type: "textarea" },
+  { key: "sobre.visao", label: "Sobre — visão", type: "textarea" },
+  {
+    key: "sobre.actividadesPrincipais",
+    label: "Sobre — o que fazemos (principais actividades)",
+    type: "repeater",
+    repeaterFields: [
+      { key: "titulo", label: "Título", type: "text" },
+      { key: "descricao", label: "Descrição", type: "textarea" },
+    ],
+  },
+  {
+    key: "sobre.publicoAlvo",
+    label: "Sobre — público-alvo",
+    type: "repeater",
+    repeaterFields: [
+      { key: "titulo", label: "Título", type: "text" },
+      { key: "descricao", label: "Descrição", type: "textarea" },
+    ],
+  },
+  {
+    key: "sobre.valores",
+    label: "Sobre — valores",
+    type: "repeater",
+    repeaterFields: [
+      { key: "titulo", label: "Título", type: "text" },
+      { key: "descricao", label: "Descrição", type: "textarea" },
+    ],
+  },
+  {
+    key: "sobre.comoTrabalhamosPassos",
+    label: "Sobre — como trabalhamos (passos)",
+    type: "repeater",
+    repeaterFields: [
+      { key: "titulo", label: "Título", type: "text" },
+      { key: "descricao", label: "Descrição", type: "textarea" },
+    ],
+  },
+  {
+    key: "sobre.voluntarios",
+    label: "Sobre — voluntárias e voluntários",
+    type: "repeater",
+    repeaterFields: [
+      { key: "nome", label: "Nome", type: "text" },
+      { key: "funcao", label: "Função", type: "text" },
+    ],
+  },
 ];
 
 export const TEAM_MEMBER_FIELDS: FieldConfig[] = [

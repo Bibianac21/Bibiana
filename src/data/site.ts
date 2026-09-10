@@ -4,11 +4,14 @@ import type { ImpactNumber } from "../types/content";
 
 export const siteSettings = {
   nome: "NKENTU",
+  // Nome e NIF da entidade legal, para o rodapé do site.
+  nomeLegal: "Associação Nkentu",
+  nif: "50030155664",
   // Logótipo real da NKENTU (versão branca, do brand board oficial).
   // Podes trocar por outra variante de cor em /admin/homepage.
   logo: { src: "/brand/logo-white.png", alt: "Logótipo da NKENTU" },
   descricaoCurta:
-    "Projecto social angolano dedicado à capacitação e desenvolvimento de mulheres, através de formação, workshops, mentorias e criação de oportunidades.",
+    "Colectivo artístico educacional de mulheres independentes, dedicado à capacitação, inclusão e impulsionamento de mulheres no mercado digital e audiovisual angolano.",
   hero: {
     headline: "Capacitar mulheres para transformar possibilidades em caminhos.",
     subheadline:
@@ -23,18 +26,18 @@ export const siteSettings = {
   impacto: {
     intro: "Cada actividade é uma oportunidade para transformar conhecimento em possibilidade.",
     numeros: [
-      { valor: "+120", label: "mulheres capacitadas" },
-      { valor: "+15", label: "actividades realizadas" },
-      { valor: "+340", label: "horas de formação" },
-      { valor: "+8", label: "mentoras activas" },
-      { valor: "+6", label: "parceiros envolvidos" },
+      { valor: "+80", label: "formandas capacitadas" },
+      { valor: "+700", label: "mulheres alcançadas" },
+      { valor: "+4", label: "em estágio" },
+      { valor: "+560", label: "seguidoras nas redes" },
+      { valor: "+4", label: "parceiros envolvidos" },
     ] satisfies ImpactNumber[],
   },
   sobreNumeros: [
-    { valor: "+120", label: "mulheres capacitadas" },
-    { valor: "+15", label: "actividades" },
-    { valor: "+8", label: "mentoras" },
-    { valor: "+6", label: "parceiros" },
+    { valor: "+80", label: "formandas capacitadas" },
+    { valor: "+700", label: "mulheres alcançadas" },
+    { valor: "+4", label: "formandas em estágio" },
+    { valor: "+560", label: "seguidoras nas redes sociais" },
   ] satisfies ImpactNumber[],
   participar: [
     {
@@ -54,16 +57,14 @@ export const siteSettings = {
     },
   ],
   contacto: {
-    email: "geral@nkentu.org",
-    telefone: "+244 923 000 000",
+    email: "nkentucoletivo@gmail.com",
+    telefone: "+244 929 425 096",
+    // Morada não fornecida na informação institucional mais recente — este
+    // valor é um placeholder por confirmar/substituir em /admin/homepage.
     endereco: "Rua da Missão, 45, Rangel, Luanda, Angola",
     // Cola aqui o link de partilha do Google Maps (Google Maps → localização → Partilhar → Copiar link).
     googleMapsUrl: "",
-    redesSociais: [
-      { label: "Instagram", href: "https://instagram.com/nkentu" },
-      { label: "Facebook", href: "https://facebook.com/nkentu" },
-      { label: "LinkedIn", href: "https://linkedin.com/company/nkentu" },
-    ],
+    redesSociais: [{ label: "Instagram", href: "https://www.instagram.com/nkentu.coletivo/" }],
   },
 };
 
@@ -73,20 +74,94 @@ export const sobreConteudo = {
     alt: "Equipa e participantes da NKENTU reunidas numa sala de formação",
   },
   quemE:
-    "A NKENTU é um projecto social angolano que cria espaços de aprendizagem, partilha e desenvolvimento para mulheres. Começámos em 2022, em Luanda, com um grupo pequeno de workshops de costura — e crescemos a partir do que as próprias participantes pediam a seguir.",
-  missao:
-    "Criar espaços onde mulheres aprendem, experimentam, partilham conhecimento e encontram novas possibilidades — em formação técnica, comunicação, gestão do próprio negócio e apoio mútuo.",
-  oQueFazemos: [
-    "Formações técnicas e digitais, gratuitas ou de baixo custo",
-    "Workshops práticos de curta duração",
-    "Um programa de mentorias individuais em empreendedorismo",
-    "Eventos e feiras que ligam participantes ao mercado",
-    "Uma newsletter e um arquivo de histórias que documentam o que vamos aprendendo",
+    "Um colectivo artístico educacional de mulheres independentes que tem como foco a capacitação, inclusão e impulsionamento de mulheres no mercado digital e audiovisual.",
+  historia:
+    "Começámos em 2023 com uma ideia no papel — hoje somos um colectivo estruturado, que capacita mulheres para inserção na indústria digital e audiovisual em Angola. Após um ano de pesquisa, estruturação e construção de parcerias, em 2024 impactámos directamente mais de 155 mulheres, realizámos oficinas mensais e garantimos oportunidades de estágio para quatro formandas. Construímos parcerias estratégicas, como com o Goethe-Institut, e fortalecemos a nossa presença digital, alcançando mais de 618 seguidoras. Trabalhamos para garantir material didáctico, transporte e alimentação às participantes, com o apoio de 10 voluntárias e doações individuais. No início de 2025, conquistámos um marco essencial: o nosso primeiro espaço físico para formações, consolidando o NKENTU como um pilar na capacitação feminina. Nos próximos anos, queremos expandir o nosso alcance, fortalecer a representatividade das mulheres no mercado e tornar o NKENTU um espaço de referência para inclusão e inovação no sector.",
+  missao: "Capacitar e ser suporte para a inserção de mulheres no mercado digital e audiovisual angolano.",
+  visao: "Ser a principal referência em Angola na formação e inclusão de mulheres no digital e audiovisual.",
+  publicoAlvo: [
+    {
+      titulo: "Jovens mulheres",
+      descricao: "Beneficiárias directas das nossas actividades culturais e dos programas educativos e participativos.",
+    },
+    {
+      titulo: "Parceiras e colaboradoras",
+      descricao:
+        "Profissionais e formadoras em fase de formação ou inserção no mercado, com pouca experiência ou à procura de capacitação e redes de apoio.",
+    },
+    {
+      titulo: "Comunidades locais",
+      descricao: "Rede activa de formações e mentorias, troca de experiências e fortalecimento institucional.",
+    },
+    {
+      titulo: "Instituições e empresas",
+      descricao: "Interessadas em gerar impacto social e cultural através de apoios e parcerias estratégicas.",
+    },
   ],
-  comoTrabalhamos:
-    "Cada formação nasce de conversas directas com quem vai participar, não de um modelo importado. Trabalhamos com facilitadoras e mentoras da comunidade, medimos resultados com números simples e publicamos o que funciona — e o que não funciona — nas nossas newsletters.",
-  comunidade:
-    "Hoje a comunidade NKENTU inclui participantes activas, antigas participantes que voltam como voluntárias, mentoras, formadoras e instituições parceiras em Luanda, Benguela e na Huíla.",
+  actividadesPrincipais: [
+    {
+      titulo: "Cine Club Baku ya Diambu",
+      descricao:
+        "Cineclube que promove exibições mensais de cinema realizado por mulheres, todas as últimas quartas-feiras, seguidas de roda de conversa em microfone aberto — cinema, mulheres e reflexão.",
+    },
+    {
+      titulo: "Formações",
+      descricao:
+        "Oficinas mensais de audiovisual em diferentes áreas, realizadas pela NKENTU e em parceria com instituições, associações e profissionais do sector.",
+    },
+    {
+      titulo: "Voluntariado profissional",
+      descricao:
+        "Programa de 6 meses que integra voluntárias na estrutura do projecto, proporcionando experiência prática em diferentes funções, com formação e acompanhamento para o desenvolvimento das suas competências.",
+    },
+    {
+      titulo: "Estágio profissional",
+      descricao:
+        "Parceria com produtoras nacionais para integrar, durante 3 meses, as melhores formandas de cada formação em experiências práticas, com apoio para despesas básicas de transporte e alimentação.",
+    },
+  ],
+  valores: [
+    {
+      titulo: "Representatividade",
+      descricao: "Acreditamos na importância de mulheres ocuparem lugares de criação, liderança e decisão.",
+    },
+    {
+      titulo: "Colaboração",
+      descricao: "Valorizamos a troca de experiências, a criação colectiva e o trabalho em rede.",
+    },
+    {
+      titulo: "Impacto social",
+      descricao:
+        "O audiovisual e a cultura como ferramentas de transformação social, capazes de ampliar vozes, questionar realidades e criar novas possibilidades.",
+    },
+    {
+      titulo: "Criatividade",
+      descricao: "Estimulamos a experimentação, a liberdade artística e a procura de novas formas de contar histórias e expressar ideias.",
+    },
+  ],
+  comoTrabalhamosPassos: [
+    { titulo: "Escuta", descricao: "Identificamos necessidades e oportunidades reais junto das comunidades e participantes." },
+    { titulo: "Formação", descricao: "Desenvolvemos actividades práticas com formadoras e profissionais qualificadas." },
+    {
+      titulo: "Acompanhamento",
+      descricao: "Criamos espaços seguros de orientação, partilha de experiências e aprendizagem contínua.",
+    },
+    {
+      titulo: "Conexão",
+      descricao: "Aproximamos as mulheres de redes profissionais, projectos de impacto social e novas oportunidades.",
+    },
+    {
+      titulo: "Avaliação",
+      descricao: "Registamos resultados, recolhemos testemunhos e analisamos o impacto social gerado.",
+    },
+  ],
+  voluntarios: [
+    { nome: "Domingos Morais", funcao: "Designer NKENTU" },
+    { nome: "Rosana Bernardo", funcao: "Assistente de Produção e Comunicação" },
+    { nome: "Dully Dully", funcao: "Assistente de Produção" },
+    { nome: "Maria Odeth", funcao: "Assistente de Produção" },
+    { nome: "Amina Ásia", funcao: "Assistente de Produção e Copywriter" },
+  ],
 };
 
 export interface SiteContent {
